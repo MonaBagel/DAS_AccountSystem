@@ -5,7 +5,7 @@ import java.util.Objects;
 
 public class GeneralResponse<T> implements Serializable
 {
-    private /*final*/ boolean successful;
+    private final boolean successful;
     private final transient T payload;
 
     public GeneralResponse(boolean successful, T payload){
@@ -31,7 +31,7 @@ public class GeneralResponse<T> implements Serializable
 
         GeneralResponse<?> that = (GeneralResponse<?>) obj;
 
-        return successful = that.successful && Objects.equals(payload, that.payload);
+        return successful == that.successful && Objects.equals(payload, that.payload);
     }
 
     @Override
