@@ -15,11 +15,7 @@
 
 
     <dependencies>
-        <dependency>
-            <groupId>za.ac.nwu.das</groupId>
-            <artifactId>AccountSystemTranslator</artifactId>
-            <version>${project.version}</version>
-        </dependency>
+
     </dependencies>
 
     
