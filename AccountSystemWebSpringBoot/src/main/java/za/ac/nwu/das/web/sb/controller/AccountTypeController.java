@@ -12,3 +12,5 @@ public class AccountTypeController {
         return new GeneralResponse<String>(true, "No types found");
     }
 }
+
+
