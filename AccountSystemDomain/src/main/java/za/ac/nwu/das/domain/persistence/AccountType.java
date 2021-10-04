@@ -7,14 +7,14 @@ import java.util.Objects;
 import java.util.Set;
 
 @Entity
-@Table(name = "Account_Transaction", schema = "dbo")
+@Table(name = "account_type", schema = "proj1_das_demo")
 public class AccountType implements Serializable {
 
     private static final long serialVersionUID = 2566762841659265490L;
 
     private Long accountTypeId;
-    private Long mnemonic;
     private String accountTypeName;
+    private Long mnemonic;
 
     private Set<AccountTransaction> accountTransactions;
 
@@ -29,11 +29,9 @@ public class AccountType implements Serializable {
     }
 
     @Id
-    @SequenceGenerator(name = "DAS_GENERIC_SEQ",
-                sequenceName = "dbo.DAS_GENERIC_SEQ",
-                allocationSize = 1)
-    @GeneratedValue(strategy = GenerationType.SEQUENCE,
-            generator = "DAS_GENERIC_SEQ")
+    //@SequenceGenerator(name = "AUTO_INCREMENT", sequenceName = "proj1_das_demo.AUTO_INCREMENT", allocationSize = 1)
+    //@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "AUTO_INCREMENT")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "account_type_id")
     public Long getAccountTypeId() {
         return accountTypeId;
@@ -52,7 +50,7 @@ public class AccountType implements Serializable {
 
     @OneToMany(targetEntity = AccountTransaction.class,
                fetch = FetchType.LAZY,
-               mappedBy = "AccountType",
+               mappedBy = "accountType",
                orphanRemoval = true,
                cascade = CascadeType.PERSIST)
     public Set<AccountTransaction> getAccountTransactions(){

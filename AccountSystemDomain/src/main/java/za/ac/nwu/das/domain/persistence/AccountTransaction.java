@@ -7,7 +7,7 @@ import java.time.LocalDate;
 import java.util.Objects;
 
 @Entity
-@Table(name = "ACCOUNT_TRANSACTION", schema = "")
+@Table(name = "account_transaction", schema = "proj1_das_demo")
 public class AccountTransaction implements Serializable {
 
     private static final long serialVersionUID = 6926049907460965566L;
@@ -31,31 +31,31 @@ public class AccountTransaction implements Serializable {
     }
 
     @Id
-    @SequenceGenerator(name = "DBO_GENERIC_SEQ",sequenceName = "dbo.DBO_GENERIC_SEQ", allocationSize = 1)
-    @GeneratedValue(strategy = GenerationType.SEQUENCE,
-            generator = "DBO_GENERIC_SEQ")
-    @Column(name = "TRANSACTION_ID")
+    //@SequenceGenerator(name = "AUTO_INCREMENT",sequenceName = "proj1_das_demo.AUTO_INCREMENT", allocationSize = 1)
+    //@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "AUTO_INCREMENT")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "transaction_id")
     public Long getTransactionId() {
         return transactionId;
     }
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "ACCOUNT_TYPE_ID")
+    @JoinColumn(name = "account_type_id")
     public AccountType getAccountType() {
         return accountType;
     }
 
-    @Column(name = "MEMBER_ID")
+    @Column(name = "member_id")
     public Long getMemberId() {
         return memberId;
     }
 
-    @Column(name = "TRANSACTION_AMOUNT")
+    @Column(name = "transaction_amount")
     public Long getTransactionAmt() {
         return transactionAmt;
     }
 
-    @Column(name = "TRANSACTION_DATE")
+    @Column(name = "transaction_date")
     public LocalDate getTransactionDate() {
         return transactionDate;
     }
