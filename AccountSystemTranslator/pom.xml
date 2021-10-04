@@ -19,6 +19,11 @@
             <artifactId>AccountSystemDomain</artifactId>
             <version>${project.version}</version>
         </dependency>
+        <dependency>
+            <groupId>za.ac.nwu.das</groupId>
+            <artifactId>AccountSystemRepository</artifactId>
+            <version>${project.version}</version>
+        </dependency>
     </dependencies>
 
 
