@@ -10,14 +10,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import za.ac.nwu.das.domain.service.GeneralResponse;
 
-
 @RestController
 @RequestMapping("account-type")
 public class AccountTypeController {
 
     @GetMapping("/all")
-    @ApiOperation(value = "Gets all the configured Account Types.",
-                  notes = "Returns a list of account types.")
+    @ApiOperation(value = "Gets all the configured Account Types.", notes = "Returns a list of account types.")
     @ApiResponses(value ={
                   @ApiResponse(code = 200, message = "Account types returned", response = GeneralResponse.class),
                   @ApiResponse(code = 400, message = "Bad Request", response = GeneralResponse.class),
@@ -25,7 +23,7 @@ public class AccountTypeController {
                   @ApiResponse(code = 500, message = "Internal Server Error", response = GeneralResponse.class),
     })
     public ResponseEntity<GeneralResponse<String>> getAll(){
-        GeneralResponse<String> response = new GeneralResponse<String>(true, "No types found");
+        GeneralResponse<String> response = new GeneralResponse<>(true, "No types found");
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 }
