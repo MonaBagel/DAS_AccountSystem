@@ -7,10 +7,11 @@ import java.util.Objects;
 import java.util.Set;
 
 @Entity
-@Table(name = "account_type", schema = "proj1_das_demo")
+@Table(name = "account_type"/*, schema = "proj1_das_demo"*/)
 public class AccountType implements Serializable {
 
     private static final long serialVersionUID = 2566762841659265490L;
+
 
     private Long accountTypeId;
     private String accountTypeName;
@@ -28,14 +29,9 @@ public class AccountType implements Serializable {
     }
 
     @Id
-    //@SequenceGenerator(name = "AUTO_INCREMENT", sequenceName = "proj1_das_demo.AUTO_INCREMENT", allocationSize = 1)
-    //@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "AUTO_INCREMENT")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "account_type_id")
-    public Long getAccountTypeId() {
-        return accountTypeId;
-    }
-
+    public Long getAccountTypeId() { return accountTypeId; }
 
     @Column(name = "mnemonic")
     public Long getMnemonic() {
@@ -47,16 +43,13 @@ public class AccountType implements Serializable {
         return accountTypeName;
     }
 
-    @OneToMany(targetEntity = AccountTransaction.class,
-               fetch = FetchType.LAZY,
-               mappedBy = "accountType",
-               orphanRemoval = true,
-               cascade = CascadeType.PERSIST)
+
+    @OneToMany(targetEntity = AccountTransaction.class, fetch = FetchType.LAZY, mappedBy = "accountType", orphanRemoval = true, cascade = CascadeType.PERSIST)
     public Set<AccountTransaction> getAccountTransactions(){
         return accountTransactions;
     }
 
-    public void AccountTransactions(Set<AccountTransaction> accountTransactions) {
+    public void setAccountTransactions(Set<AccountTransaction> accountTransactions) {
         this.accountTransactions = accountTransactions;
     }
 
@@ -64,12 +57,12 @@ public class AccountType implements Serializable {
         this.accountTypeId = accountTypeId;
     }
 
-    public void setMnemonic(Long mnemonic) {
-        this.mnemonic = mnemonic;
-    }
-
     public void setAccountTypeName(String accountTypeName) {
         this.accountTypeName = accountTypeName;
+    }
+
+    public void setMnemonic(Long mnemonic) {
+        this.mnemonic = mnemonic;
     }
 
     @Override
@@ -77,20 +70,21 @@ public class AccountType implements Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         AccountType that = (AccountType) o;
-        return Objects.equals(accountTypeId, that.accountTypeId) && Objects.equals(mnemonic, that.mnemonic) && Objects.equals(accountTypeName, that.accountTypeName);
+        return Objects.equals(accountTypeId, that.accountTypeId) && Objects.equals(accountTypeName, that.accountTypeName) && Objects.equals(mnemonic, that.mnemonic) && Objects.equals(accountTransactions, that.accountTransactions);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(accountTypeId, mnemonic, accountTypeName);
+        return Objects.hash(accountTypeId, accountTypeName, mnemonic, accountTransactions);
     }
 
     @Override
     public String toString() {
         return "AccountType{" +
                 "accountTypeId=" + accountTypeId +
+                ", accountTypeName='" + accountTypeName + '\'' +
                 ", mnemonic=" + mnemonic +
-                ", accountTypeName=" + accountTypeName +
+                /*", accountTransactions=" + accountTransactions +*/
                 '}';
     }
 }
