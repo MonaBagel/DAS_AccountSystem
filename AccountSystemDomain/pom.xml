@@ -16,17 +16,7 @@
     <dependencies>
         <dependency>
             <groupId>za.ac.nwu.das</groupId>
-            <artifactId>AccountSystemRepository</artifactId>
-            <version>${project.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>za.ac.nwu.das</groupId>
-            <artifactId>AccountSystemTranslator</artifactId>
-            <version>${project.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>za.ac.nwu.das</groupId>
-            <artifactId>AccountSystemLogic</artifactId>
+            <artifactId>AccountSystemDomain</artifactId>
             <version>${project.version}</version>
         </dependency>
         <dependency>
@@ -39,6 +29,11 @@
                     <artifactId>commons-logging</artifactId>
                 </exclusion>
             </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>javax.persistence</groupId>
+            <artifactId>javax.persistence-api</artifactId>
+            <scope>provided</scope>
         </dependency>
     </dependencies>
 

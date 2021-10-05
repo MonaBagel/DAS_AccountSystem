@@ -15,7 +15,11 @@
 
 
     <dependencies>
-
+        <dependency>
+            <groupId>za.ac.nwu.das</groupId>
+            <artifactId>AccountSystemDomain</artifactId>
+            <version>${project.version}</version>
+        </dependency>
     </dependencies>
 
     
