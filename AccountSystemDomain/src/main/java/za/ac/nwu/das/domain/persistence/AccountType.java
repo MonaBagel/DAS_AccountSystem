@@ -15,14 +15,14 @@ public class AccountType implements Serializable {
 
     private Long accountTypeId;
     private String accountTypeName;
-    private Long mnemonic;
+    private String mnemonic;
 
     private Set<AccountTransaction> accountTransactions;
 
     public AccountType() {
     }
 
-    public AccountType(Long accountTypeId, Long mnemonic, String accountTypeName) {
+    public AccountType(Long accountTypeId, String mnemonic, String accountTypeName) {
         this.accountTypeId = accountTypeId;
         this.mnemonic = mnemonic;
         this.accountTypeName = accountTypeName;
@@ -34,7 +34,7 @@ public class AccountType implements Serializable {
     public Long getAccountTypeId() { return accountTypeId; }
 
     @Column(name = "mnemonic")
-    public Long getMnemonic() {
+    public String getMnemonic() {
         return mnemonic;
     }
 
@@ -61,7 +61,7 @@ public class AccountType implements Serializable {
         this.accountTypeName = accountTypeName;
     }
 
-    public void setMnemonic(Long mnemonic) {
+    public void setMnemonic(String mnemonic) {
         this.mnemonic = mnemonic;
     }
 

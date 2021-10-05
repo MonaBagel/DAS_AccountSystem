@@ -15,7 +15,7 @@ import springfox.documentation.spring.web.plugins.Docket;
 import java.util.Collections;
 
 @Configuration
-@Import(springfox.bean.validators.configuration.BeanValidatorPluginsConfiguration.class)
+//@Import(springfox.bean.validators.configuration.BeanValidatorPluginsConfiguration.class)
 public class SwaggerConfig {
 
     @Value("${swagger.application.version}")
@@ -28,12 +28,13 @@ public class SwaggerConfig {
     @Bean
     public Docket api(){
         return new Docket(DocumentationType.SWAGGER_2)
+                .apiInfo(apiInfo())
                 .select()
                 .apis(RequestHandlerSelectors.withClassAnnotation(RestController.class))
                 .paths(PathSelectors.any())
                 .build()
                 .pathMapping("/")
-                .apiInfo(apiInfo());
+                ;
     }
 
     private ApiInfo apiInfo() {
