@@ -25,7 +25,6 @@ public class AccountType implements Serializable {
         this.accountTypeId = accountTypeId;
         this.mnemonic = mnemonic;
         this.accountTypeName = accountTypeName;
-
     }
 
     @Id
