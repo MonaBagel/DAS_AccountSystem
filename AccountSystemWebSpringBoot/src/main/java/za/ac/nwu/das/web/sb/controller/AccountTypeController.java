@@ -16,7 +16,7 @@ import za.ac.nwu.das.logic.flow.FetchAccountTypeFlow;
 import java.util.List;
 
 @RestController
-@RequestMapping("/account-type")
+@RequestMapping("account-type")
 public class AccountTypeController {
 
     private final FetchAccountTypeFlow fetchAccountTypeFlow;
@@ -32,7 +32,7 @@ public class AccountTypeController {
                   @ApiResponse(code = 200, message = "Account types returned", response = GeneralResponse.class),
                   @ApiResponse(code = 400, message = "Bad Request", response = GeneralResponse.class),
                   @ApiResponse(code = 404, message = "Not Found", response = GeneralResponse.class),
-                  @ApiResponse(code = 500, message = "Internal Server Error", response = GeneralResponse.class),
+                  @ApiResponse(code = 500, message = "Internal Server Error", response = GeneralResponse.class)
     })
     public ResponseEntity<GeneralResponse<List<AccountTypeDto>>> getAll(){
         List<AccountTypeDto> accountTypes = fetchAccountTypeFlow.getAllAccountTypes();

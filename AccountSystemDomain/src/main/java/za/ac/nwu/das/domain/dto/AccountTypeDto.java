@@ -1,7 +1,6 @@
 package za.ac.nwu.das.domain.dto;
 
 import za.ac.nwu.das.domain.persistence.AccountType;
-
 import java.io.Serializable;
 
 public class AccountTypeDto implements Serializable {

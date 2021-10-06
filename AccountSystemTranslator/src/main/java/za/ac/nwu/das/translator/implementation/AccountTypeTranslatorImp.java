@@ -1,4 +1,4 @@
-package za.ac.nwu.das.translator.impl;
+package za.ac.nwu.das.translator.implementation;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
