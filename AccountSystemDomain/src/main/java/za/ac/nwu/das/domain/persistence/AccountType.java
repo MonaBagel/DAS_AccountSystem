@@ -28,24 +28,26 @@ public class AccountType implements Serializable {
         this.accountTypeName = accountTypeName;
     }
 
+    public AccountType(String accountTypeName, String mnemonic) {
+        this.accountTypeId = accountTypeId;
+        this.mnemonic = mnemonic;
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "account_type_id")
     public Long getAccountTypeId() { return accountTypeId; }
 
     @Column(name = "mnemonic")
-    public String getMnemonic() {
-        return mnemonic;
-    }
+    public String getMnemonic() { return mnemonic; }
 
     @Column(name = "account_type_name")
-    public String getAccountTypeName() {
-        return accountTypeName;
-    }
+    public String getAccountTypeName() { return accountTypeName; }
 
 
     @OneToMany(targetEntity = AccountTransaction.class, fetch = FetchType.LAZY, mappedBy = "accountType", orphanRemoval = true, cascade = CascadeType.PERSIST)
     public Set<AccountTransaction> getAccountTransactions(){
+
         return accountTransactions;
     }
 

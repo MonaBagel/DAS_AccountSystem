@@ -34,4 +34,10 @@ public class AccountTypeTranslatorImp implements AccountTypeTranslator {
         }
         return accountTypeDtos;
     }
+
+    @Override
+    public AccountTypeDto create(AccountTypeDto accountType)
+    {
+        return accountType;
+    }
 }

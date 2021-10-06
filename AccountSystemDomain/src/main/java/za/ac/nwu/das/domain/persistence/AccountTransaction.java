@@ -1,6 +1,7 @@
 package za.ac.nwu.das.domain.persistence;
 
-
+import lombok.Getter;
+import lombok.Setter;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDate;
@@ -47,10 +48,12 @@ public class AccountTransaction implements Serializable {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "account_type_id")
     public AccountType getAccountType() {
+
         return accountType;
     }
 
     public void setAccountType(AccountType accountType) {
+
         this.accountType = accountType;
     }
 
@@ -61,14 +64,18 @@ public class AccountTransaction implements Serializable {
 
     @Column(name = "transaction_amount")
     public Long getTransactionAmt() {
+
         return transactionAmt;
     }
 
+    @Column(name = "transaction_date")
     public LocalDate getTransactionDate() {
+
         return transactionDate;
     }
 
     public void setTransactionId(Long transactionId) {
+
         this.transactionId = transactionId;
     }
 
@@ -77,10 +84,12 @@ public class AccountTransaction implements Serializable {
     }
 
     public void setTransactionAmt(Long transactionAmt) {
+
         this.transactionAmt = transactionAmt;
     }
 
     public void setTransactionDate(LocalDate transactionDate) {
+
         this.transactionDate = transactionDate;
     }
 
@@ -89,19 +98,18 @@ public class AccountTransaction implements Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         AccountTransaction that = (AccountTransaction) o;
-        return Objects.equals(transactionId, that.transactionId) /*&& Objects.equals(accountType, that.accountType)*/ && Objects.equals(memberId, that.memberId) && Objects.equals(transactionAmt, that.transactionAmt) && Objects.equals(transactionDate, that.transactionDate);
+        return Objects.equals(transactionId, that.transactionId) && Objects.equals(accountType, that.accountType) && Objects.equals(memberId, that.memberId) && Objects.equals(transactionAmt, that.transactionAmt) && Objects.equals(transactionDate, that.transactionDate);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(transactionId, /*accountTypeId,*/ accountType, memberId, transactionAmt, transactionDate);
+        return Objects.hash(transactionId, accountType, memberId, transactionAmt, transactionDate);
     }
 
     @Override
     public String toString() {
         return "AccountTransaction{" +
                 "transactionId=" + transactionId +
-                //", accountTypeId=" + accountTypeId +
                 ", accountType=" + accountType +
                 ", memberId=" + memberId +
                 ", transactionAmt=" + transactionAmt +

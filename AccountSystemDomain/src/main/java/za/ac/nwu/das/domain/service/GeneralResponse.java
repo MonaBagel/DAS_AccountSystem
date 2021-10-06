@@ -5,6 +5,8 @@ import java.util.Objects;
 
 public class GeneralResponse<T> implements Serializable
 {
+    private static final long serialVersionUID = 5181719437031172578L;
+
     private final boolean successful;
     private final transient T payload;
 
@@ -36,12 +38,15 @@ public class GeneralResponse<T> implements Serializable
 
     @Override
     public int hashCode(){
+
         return Objects.hash(successful, payload);
     }
 
     @Override
     public String toString(){
-        return "GeneralResponse{" + "successful" + successful + ", payload" + payload + '}';
+
+        return "GeneralResponse{" + "successful" + successful +
+                                ", payload" + payload + '}';
     }
 
 
