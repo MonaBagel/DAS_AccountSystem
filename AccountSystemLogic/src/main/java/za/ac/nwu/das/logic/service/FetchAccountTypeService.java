@@ -6,4 +6,6 @@ import java.util.List;
 
 public interface FetchAccountTypeService {
     List<AccountTypeDto> getAllAccountTypes();
+
+    AccountTypeDto getAccountTypeByMnemonic(String mnemonic);
 }

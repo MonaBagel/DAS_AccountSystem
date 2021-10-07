@@ -25,7 +25,6 @@ public class AccountType implements Serializable {
     public AccountType() {
     }
 
-
     public AccountType(Long accountTypeId, String mnemonic, String accountTypeName) {
         this.accountTypeId = accountTypeId;
         this.mnemonic = mnemonic;
@@ -38,7 +37,6 @@ public class AccountType implements Serializable {
     }
 
 
-    @JsonIgnore
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "account_type_id")
@@ -50,8 +48,6 @@ public class AccountType implements Serializable {
     @Column(name = "account_type_name")
     public String getAccountTypeName() { return accountTypeName; }
 
-
-    @JsonIgnore
     @OneToMany(targetEntity = AccountTransaction.class, fetch = FetchType.LAZY, mappedBy = "accountType", orphanRemoval = true, cascade = CascadeType.PERSIST)
     public Set<AccountTransaction> getAccountTransactions(){
 

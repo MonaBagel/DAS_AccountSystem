@@ -1,7 +1,7 @@
 package za.ac.nwu.das.domain.persistence;
 
-import lombok.Getter;
-import lombok.Setter;
+//import lombok.Getter;
+//import lombok.Setter;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDate;

@@ -26,5 +26,10 @@ public class FetchAccountTypeServiceImp implements FetchAccountTypeService {
         return accountTypeTranslator.getAllAccountTypes();
     }
 
+    public AccountTypeDto getAccountTypeByMnemonic(String mnemonic){
+
+        return accountTypeTranslator.getAccountTypeByMnemonic(mnemonic);
+    }
+
 
 }

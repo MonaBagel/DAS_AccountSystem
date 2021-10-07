@@ -30,7 +30,7 @@ public class AccountTypeTranslatorImp implements AccountTypeTranslator {
             }
         }catch (Exception ex){
             //TODO: log
-            throw new RuntimeException("Unable to read from the Database", ex);
+            throw new RuntimeException("Unable to read from the DB", ex);
         }
         return accountTypeDtos;
     }
@@ -47,4 +47,23 @@ public class AccountTypeTranslatorImp implements AccountTypeTranslator {
         }
 
     }
+
+    @Override
+    public AccountTypeDto getAccountTypeByMnemonic(String mnemonic){
+        try{
+            AccountType accountType = accountTypeRepo.getAccountTypeByMnemonic(mnemonic);
+            return new AccountTypeDto(accountType);
+        }catch(Exception ex){
+            throw new RuntimeException("Unable to read from the DB", ex);
+        }
+    }
+
+//    @Override
+//    public AccountTypeDto getAccountTypeDtoByMnemonic(String mnemonic){
+//        try{
+//            return accountTypeRepo.getAccountTypeDtoByMnemonic(mnemonic);
+//        }catch(Exception ex){
+//            throw new RuntimeException("Unable to read from the DB", ex);
+//        }
+//    }
 }

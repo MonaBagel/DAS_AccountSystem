@@ -88,4 +88,6 @@ public class AccountTypeDto implements Serializable {
     public AccountType getAccountType() {
         return new AccountType(getMnemonic(), getAccountTypeName());
     }
+
+
 }
