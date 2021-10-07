@@ -36,6 +36,7 @@ public class AccountTypeDto implements Serializable {
             notes = "Uniquely identifies the account type",
             dataType = "java.lang.String",
             example = "MILES",
+            allowEmptyValue = false,
             required = true)
     public String getMnemonic(){
         return mnemonic;

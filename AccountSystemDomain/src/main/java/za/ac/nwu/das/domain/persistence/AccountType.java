@@ -2,6 +2,7 @@ package za.ac.nwu.das.domain.persistence;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import io.swagger.annotations.ApiModelProperty;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -32,7 +33,6 @@ public class AccountType implements Serializable {
     }
 
     public AccountType(String mnemonic, String accountTypeName) {
-        this.accountTypeId = getAccountTypeId();
         this.mnemonic = mnemonic;
         this.accountTypeName = accountTypeName;
     }
@@ -96,4 +96,6 @@ public class AccountType implements Serializable {
                 ", accountTransactions=" + accountTransactions +
                 '}';
     }
+
+
 }
