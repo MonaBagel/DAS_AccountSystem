@@ -63,17 +63,12 @@ public class AccountTypeDto implements Serializable {
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        AccountTypeDto that = (AccountTypeDto) o;
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null || getClass() != obj.getClass()) return false;
+        AccountTypeDto that = (AccountTypeDto) obj;
         return Objects.equals(mnemonic, that.mnemonic) && Objects.equals(accountTypeName, that.accountTypeName);
     }
-
-//    @JsonIgnore
-//    public AccountType getAccountType(){
-//        return new AccountType(getAccountTypeName(), getMnemonic());
-//    }
 
     @Override
     public int hashCode() {
@@ -86,5 +81,10 @@ public class AccountTypeDto implements Serializable {
                 "mnemonic='" + mnemonic + '\'' +
                 ", accountTypeName='" + accountTypeName + '\'' +
                 '}';
+    }
+
+    @JsonIgnore
+    public AccountType getAccountType() {
+        return new AccountType(getMnemonic(), getAccountTypeName());
     }
 }

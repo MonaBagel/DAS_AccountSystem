@@ -1,4 +1,4 @@
-package za.ac.nwu.das.logic.service.implementation;
+package za.ac.nwu.das.logic.service.imp;
 
 import org.springframework.stereotype.Component;
 import za.ac.nwu.das.domain.dto.AccountTypeDto;
@@ -6,7 +6,6 @@ import za.ac.nwu.das.logic.service.CreateAccountTypeService;
 import za.ac.nwu.das.translator.AccountTypeTranslator;
 
 import javax.transaction.Transactional;
-import java.time.LocalDate;
 
 @Transactional
 @Component

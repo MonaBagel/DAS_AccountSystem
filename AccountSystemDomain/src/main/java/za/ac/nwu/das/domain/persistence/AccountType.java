@@ -1,6 +1,8 @@
 package za.ac.nwu.das.domain.persistence;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Objects;
@@ -22,17 +24,21 @@ public class AccountType implements Serializable {
     public AccountType() {
     }
 
+
     public AccountType(Long accountTypeId, String mnemonic, String accountTypeName) {
         this.accountTypeId = accountTypeId;
         this.mnemonic = mnemonic;
         this.accountTypeName = accountTypeName;
     }
 
-    public AccountType(String accountTypeName, String mnemonic) {
-        this.accountTypeId = accountTypeId;
+    public AccountType(String mnemonic, String accountTypeName) {
+        this.accountTypeId = getAccountTypeId();
         this.mnemonic = mnemonic;
+        this.accountTypeName = accountTypeName;
     }
 
+
+    @JsonIgnore
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "account_type_id")
@@ -45,6 +51,7 @@ public class AccountType implements Serializable {
     public String getAccountTypeName() { return accountTypeName; }
 
 
+    @JsonIgnore
     @OneToMany(targetEntity = AccountTransaction.class, fetch = FetchType.LAZY, mappedBy = "accountType", orphanRemoval = true, cascade = CascadeType.PERSIST)
     public Set<AccountTransaction> getAccountTransactions(){
 
@@ -85,8 +92,8 @@ public class AccountType implements Serializable {
         return "AccountType{" +
                 "accountTypeId=" + accountTypeId +
                 ", accountTypeName='" + accountTypeName + '\'' +
-                ", mnemonic=" + mnemonic +
-                /*", accountTransactions=" + accountTransactions +*/
+                ", mnemonic='" + mnemonic + '\'' +
+                ", accountTransactions=" + accountTransactions +
                 '}';
     }
 }

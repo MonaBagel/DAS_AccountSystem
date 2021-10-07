@@ -49,7 +49,7 @@ public class AccountTypeController {
     }
 
 
-    @PostMapping("/add")
+    @PostMapping("")
     @ApiOperation(value = "Creates a new AccountType", notes = "Creates a new AccountType in the DB")
     @ApiResponses(value = {
             @ApiResponse(code = 201, message = "The accountType was created succesfully", response = GeneralResponse.class),

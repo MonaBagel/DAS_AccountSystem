@@ -1,4 +1,4 @@
-package za.ac.nwu.das.logic.service.implementation;
+package za.ac.nwu.das.logic.service.imp;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -7,7 +7,6 @@ import za.ac.nwu.das.logic.service.FetchAccountTypeService;
 import za.ac.nwu.das.translator.AccountTypeTranslator;
 
 import javax.transaction.Transactional;
-import java.util.ArrayList;
 import java.util.List;
 
 @Transactional
@@ -27,11 +26,5 @@ public class FetchAccountTypeServiceImp implements FetchAccountTypeService {
         return accountTypeTranslator.getAllAccountTypes();
     }
 
-//    @Override
-//    public List<AccountTypeDto> getAllAccountTypes(){
-//        List<AccountTypeDto> accountTypeDtos = new ArrayList<>();
-//        accountTypeDtos.add(new AccountTypeDto("MILES", "Miles"));
-//        return accountTypeDtos;
-//    }
 
 }
