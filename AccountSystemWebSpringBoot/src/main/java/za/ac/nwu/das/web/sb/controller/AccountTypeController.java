@@ -68,9 +68,9 @@ public class AccountTypeController {
     @GetMapping("/findSpecific {mnemonic}")
     @ApiOperation(value = "Fetches the specific AccountType", notes = "Fetches the AccountType corresponding to the given mnemonic.")
     @ApiResponses(value = {
-            @ApiResponse(code = 200, message = "Goal Found"),
+            @ApiResponse(code = 200, message = "AccountType Found"),
             @ApiResponse(code = 400, message = "Bad Request", response = GeneralResponse.class),
-            @ApiResponse(code = 404, message = "Resource Not Found", response = GeneralResponse.class),
+            @ApiResponse(code = 404, message = "AccountType Not Found", response = GeneralResponse.class),
             @ApiResponse(code = 500, message = "Internal Server Error", response = GeneralResponse.class)
     })
     public ResponseEntity<GeneralResponse<AccountTypeDto>> getAccountType(
