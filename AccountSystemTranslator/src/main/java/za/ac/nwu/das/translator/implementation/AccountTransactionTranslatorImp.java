@@ -22,15 +22,16 @@ public class AccountTransactionTranslatorImp implements AccountTransactionTransl
         this.accountTransactionRepo = accountTransactionRepo;
     }
 
+
     @Override
-    public List<AccountTransactionDto> getAllTransactions(){
+    public List<AccountTransactionDto> getAllTransactions() {
 
         List<AccountTransactionDto> accountTransactionDtos = new ArrayList<>();
         try{
             for(AccountTransaction accountTransaction : accountTransactionRepo.findAll()){
                 accountTransactionDtos.add(new AccountTransactionDto(accountTransaction));
             }
-        }catch (Exception ex){
+        }catch(Exception ex){
             //TODO: log
             throw new RuntimeException("Unable to read from the DB", ex);
         }
@@ -39,21 +40,6 @@ public class AccountTransactionTranslatorImp implements AccountTransactionTransl
 
 
 
-
-    @Override
-    public List<AccountTransactionDto> getAllAccountTypeTransactions(String mnemonic){
-
-        List<AccountTransactionDto> accountTransactionDtos = new ArrayList<>();
-        try{
-            for(AccountTransaction accountTransaction : accountTransactionRepo.findAll()){
-                accountTransactionDtos.add(new AccountTransactionDto(accountTransaction));
-            }
-        }catch (Exception ex){
-            //TODO: log
-            throw new RuntimeException("Unable to read from the DB", ex);
-        }
-        return accountTransactionDtos;
-    }
 
 
 }

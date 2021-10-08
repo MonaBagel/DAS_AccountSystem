@@ -1,4 +1,29 @@
 package za.ac.nwu.das.logic.service.imp;
 
-public class CreateAccountTransactionServiceImp {
+import org.springframework.stereotype.Component;
+import za.ac.nwu.das.domain.dto.AccountTransactionDto;
+import za.ac.nwu.das.domain.dto.AccountTypeDto;
+import za.ac.nwu.das.logic.service.CreateAccountTransactionService;
+import za.ac.nwu.das.translator.AccountTransactionTranslator;
+
+import javax.transaction.Transactional;
+
+@Component
+public class CreateAccountTransactionServiceImp implements CreateAccountTransactionService {
+
+    private final AccountTransactionTranslator accountTransactionTranslator;
+
+    public CreateAccountTransactionServiceImp(AccountTransactionTranslator accountTransactionTranslator) {
+        this.accountTransactionTranslator = accountTransactionTranslator;
+    }
+
+//    @Override
+//    public AccountTransactionDto createAccountType(AccountTransactionDto accountTransaction){
+//
+//        if (null == accountTransaction.getTransactionDate()){
+//            accountTransaction.setTransactionDate(LocalDate.now());
+//        }
+//        return accountTransactionTranslator.createAccountTransaction(accountType);
+//    }
+
 }

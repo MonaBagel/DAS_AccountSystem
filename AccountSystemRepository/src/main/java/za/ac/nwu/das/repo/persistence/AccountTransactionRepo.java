@@ -12,11 +12,11 @@ import java.util.List;
 @Repository
 public interface AccountTransactionRepo extends JpaRepository<AccountTransaction, Long> {
 
-    @Query(value = "SELECT account_type_name, transaction_amount, transaction_date" +
-                    "FROM account_transaction" +
-                    "INNER JOIN account_type" +
-                    "ON account_transaction.account_type_id = account_type.account_type_id" +
-                    "WHERE member_id = 1" +
-                    "AND account_type.mnemonic = :mnemonic ", nativeQuery = true)
-    List<AccountTransactionDto> getAllAccountTypeTransactions(String mnemonic);
+//    @Query(value = "SELECT " +
+//            "           actx, acct " +
+//            "       FROM " +
+//            "           AccountTransaction actx, AccountType acct " +
+//            "       WHERE acct.mnemonic = :mnemonic ")
+//    List<AccountTransactionDto> getAllAccountTypeTransactions(String mnemonic);
+
 }

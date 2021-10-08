@@ -7,7 +7,6 @@ import za.ac.nwu.das.translator.AccountTypeTranslator;
 
 import javax.transaction.Transactional;
 
-@Transactional
 @Component
 public class CreateAccountTypeServiceImp implements CreateAccountTypeService {
 
@@ -18,7 +17,7 @@ public class CreateAccountTypeServiceImp implements CreateAccountTypeService {
     }
 
     @Override
-    public AccountTypeDto create(AccountTypeDto accountType){
+    public AccountTypeDto createAccountType(AccountTypeDto accountType){
 
 //        if (null == accountTransaction.getTransactionDate()){
 //            accountTransaction.setTransactionDate(LocalDate.now());

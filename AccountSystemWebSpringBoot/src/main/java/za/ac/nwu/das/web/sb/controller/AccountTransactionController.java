@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import za.ac.nwu.das.domain.dto.AccountTransactionDto;
 import za.ac.nwu.das.domain.service.GeneralResponse;
+import za.ac.nwu.das.logic.service.CreateAccountTransactionService;
 import za.ac.nwu.das.logic.service.FetchAccountTransactionService;
 
 import java.util.List;
@@ -19,12 +20,12 @@ import java.util.List;
 public class AccountTransactionController {
 
     private final FetchAccountTransactionService fetchAccountTransactionService;
-    //private final CreateAccountTXNService createAccountTXNService;
+    //private final CreateAccountTransactionService createAccountTransactionService;
 
 
     @Autowired
     public AccountTransactionController(FetchAccountTransactionService fetchAccountTransactionService/*,
-                                        CreateAccountTXNService createAccountTXNService*/){
+                                        CreateAccountTransactionService createAccountTransactionService*/){
         this.fetchAccountTransactionService = fetchAccountTransactionService;
         //this.createAccountTXNService = createAccountTXNService;
     }
@@ -36,47 +37,25 @@ public class AccountTransactionController {
                     @ApiResponse(code = 400, message = "Bad Request", response = GeneralResponse.class),
                     @ApiResponse(code = 404, message = "Not Found", response = GeneralResponse.class),
                     @ApiResponse(code = 500, message = "Internal Server Error", response = GeneralResponse.class)})
-    public ResponseEntity<GeneralResponse<List<AccountTransactionDto>>> getAllTransactions(){
+    public ResponseEntity<GeneralResponse<List<AccountTransactionDto>>> getAll(){
 
         List<AccountTransactionDto> transactions = fetchAccountTransactionService.getAllTransactions();
         GeneralResponse<List<AccountTransactionDto>> response = new GeneralResponse<>(true, transactions);
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
-//    @GetMapping("{transactionId}")
+//    @GetMapping("/{transactionId}")
 //    public ResponseEntity<GeneralResponse<AccountTXNDto>> createTransaction(){
 //
 //    }
 
-    @GetMapping("/{mnemonic}")
-    @ApiOperation(value = "Fetches transactions for a specific AccountType", notes = "Fetches AccountTransactions corresponding to the given AccountType mnemonic.")
-    @ApiResponses(value = {
-            @ApiResponse(code = 200, message = "AccountType Transactions Found"),
-            @ApiResponse(code = 400, message = "Bad Request", response = GeneralResponse.class),
-            @ApiResponse(code = 404, message = "AccountType Transactions Not Found", response = GeneralResponse.class),
-            @ApiResponse(code = 500, message = "Internal Server Error", response = GeneralResponse.class)
-    })
-    public ResponseEntity<GeneralResponse<List<AccountTransactionDto>>> getAllTransactionsByAccountType(
-            @ApiParam(value = "The mnemonic that uniquely identifies an AccountType",
-                        example = "MILES",
-                        name = "mnemonic",
-                        required = true)
-            @PathVariable ("mnemonic") final String mnemonic){
-
-        List<AccountTransactionDto> accountTransactions = fetchAccountTransactionService.getAllAccountTypeTransactions(mnemonic);
-        GeneralResponse<List<AccountTransactionDto>> response = new GeneralResponse<>(true, accountTransactions);
-        return new ResponseEntity<>(response, HttpStatus.OK);
-    }
 
 //    @PostMapping("")
-//    public ResponseEntity<GeneralResponse<AccountTXNDto>> createTransaction(){
+//    public ResponseEntity<GeneralResponse<AccountTXNDto>> create(){
 //
 //    }
 
-//    @GetMapping("/{mnemonic}")
-//    public ResponseEntity<GeneralResponse<AccountTXNDto>> createTransaction(){
-//
-//    }
+
 
 
 

@@ -7,5 +7,4 @@ public interface FetchAccountTransactionService {
 
     List<AccountTransactionDto> getAllTransactions();
 
-    List<AccountTransactionDto> getAllAccountTypeTransactions(String mnemonic);
 }

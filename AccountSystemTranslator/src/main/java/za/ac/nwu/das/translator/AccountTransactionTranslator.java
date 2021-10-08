@@ -7,6 +7,4 @@ import java.util.List;
 public interface AccountTransactionTranslator {
 
     List<AccountTransactionDto> getAllTransactions();
-
-    List<AccountTransactionDto> getAllAccountTypeTransactions(String mnemonic);
 }

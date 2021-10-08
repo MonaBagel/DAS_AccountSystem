@@ -7,6 +7,7 @@ import za.ac.nwu.das.logic.service.FetchAccountTransactionService;
 import za.ac.nwu.das.translator.AccountTransactionTranslator;
 
 import javax.transaction.Transactional;
+import java.util.ArrayList;
 import java.util.List;
 
 @Transactional
@@ -21,18 +22,11 @@ public class FetchAccountTransactionServiceImp implements FetchAccountTransactio
         this.accountTransactionTranslator = accountTransactionTranslator;
     }
 
+
     @Override
-    public List<AccountTransactionDto> getAllTransactions(){
+    public List<AccountTransactionDto> getAllTransactions() {
 
         return accountTransactionTranslator.getAllTransactions();
-    }
-
-
-
-    @Override
-    public List<AccountTransactionDto> getAllAccountTypeTransactions(String mnemonic){
-
-        return accountTransactionTranslator.getAllAccountTypeTransactions(mnemonic);
     }
 
 }

@@ -10,9 +10,9 @@ import za.ac.nwu.das.domain.persistence.AccountType;
 public interface AccountTypeRepo extends JpaRepository<AccountType, Long> {
 
     @Query(value = "SELECT " +
-            "           acct" +
+            "           acct " +
             "       FROM " +
-            "           AccountType acct" +
+            "           AccountType acct " +
             "       WHERE acct.mnemonic = :mnemonic ")
     AccountType getAccountTypeByMnemonic(String mnemonic);
 }

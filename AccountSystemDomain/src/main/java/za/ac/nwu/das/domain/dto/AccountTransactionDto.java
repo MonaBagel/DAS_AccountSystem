@@ -6,6 +6,7 @@ import za.ac.nwu.das.domain.persistence.AccountType;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.Objects;
 
 public class AccountTransactionDto implements Serializable {
 
@@ -67,4 +68,27 @@ public class AccountTransactionDto implements Serializable {
     public void setTransactionDate(LocalDate transactionDate) { this.transactionDate = transactionDate; }
 
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        AccountTransactionDto that = (AccountTransactionDto) o;
+        return Objects.equals(transactionId, that.transactionId) && Objects.equals(accountTypeMnemonic, that.accountTypeMnemonic) && Objects.equals(memberId, that.memberId) && Objects.equals(transactionAmt, that.transactionAmt) && Objects.equals(transactionDate, that.transactionDate);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(transactionId, accountTypeMnemonic, memberId, transactionAmt, transactionDate);
+    }
+
+    @Override
+    public String toString() {
+        return "AccountTransactionDto{" +
+                "transactionId=" + transactionId +
+                ", accountTypeMnemonic='" + accountTypeMnemonic + '\'' +
+                ", memberId=" + memberId +
+                ", transactionAmt=" + transactionAmt +
+                ", transactionDate=" + transactionDate +
+                '}';
+    }
 }
