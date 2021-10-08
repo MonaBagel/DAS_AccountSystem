@@ -38,8 +38,15 @@ public class AccountTransactionTranslatorImp implements AccountTransactionTransl
         return accountTransactionDtos;
     }
 
-
-
+    @Override
+    public AccountTransactionDto getTransactionById(Long transactionId) {
+        try{
+            AccountTransaction transaction = accountTransactionRepo.getTransactionById(transactionId);
+            return new AccountTransactionDto(transaction);
+        }catch (Exception ex){
+            throw new RuntimeException("Unable to read from the DB", ex);
+        }
+    }
 
 
 }

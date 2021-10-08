@@ -29,4 +29,10 @@ public class FetchAccountTransactionServiceImp implements FetchAccountTransactio
         return accountTransactionTranslator.getAllTransactions();
     }
 
+    @Override
+    public AccountTransactionDto getTransactionById(Long transactionId) {
+
+        return accountTransactionTranslator.getTransactionById(transactionId);
+    }
+
 }

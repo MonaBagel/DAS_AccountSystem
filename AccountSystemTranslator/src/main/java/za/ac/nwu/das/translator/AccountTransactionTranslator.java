@@ -7,4 +7,6 @@ import java.util.List;
 public interface AccountTransactionTranslator {
 
     List<AccountTransactionDto> getAllTransactions();
+
+    AccountTransactionDto getTransactionById(Long transactionId);
 }

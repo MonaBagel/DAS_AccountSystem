@@ -20,14 +20,14 @@ import java.util.List;
 public class AccountTransactionController {
 
     private final FetchAccountTransactionService fetchAccountTransactionService;
-    //private final CreateAccountTransactionService createAccountTransactionService;
+    private final CreateAccountTransactionService createAccountTransactionService;
 
 
     @Autowired
-    public AccountTransactionController(FetchAccountTransactionService fetchAccountTransactionService/*,
-                                        CreateAccountTransactionService createAccountTransactionService*/){
+    public AccountTransactionController(FetchAccountTransactionService fetchAccountTransactionService,
+                                        CreateAccountTransactionService createAccountTransactionService){
         this.fetchAccountTransactionService = fetchAccountTransactionService;
-        //this.createAccountTXNService = createAccountTXNService;
+        this.createAccountTransactionService = createAccountTransactionService;
     }
 
     @GetMapping("/all")
@@ -44,10 +44,26 @@ public class AccountTransactionController {
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
-//    @GetMapping("/{transactionId}")
-//    public ResponseEntity<GeneralResponse<AccountTXNDto>> createTransaction(){
-//
-//    }
+    @GetMapping("/{transactionId}")
+    @ApiOperation(value = "Fetches a specified Account Transaction.", notes = "Fetches an AccountTransaction corresponding to the transactionId input.")
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Transactions Returned", response = GeneralResponse.class),
+            @ApiResponse(code = 400, message = "Bad Request", response = GeneralResponse.class),
+            @ApiResponse(code = 404, message = "Not Found", response = GeneralResponse.class),
+            @ApiResponse(code = 500, message = "Internal Server Error", response = GeneralResponse.class)
+    })
+    public ResponseEntity<GeneralResponse<AccountTransactionDto>> getTransaction(
+            @ApiParam(value = "The transactionId that is used to uniquely identify an AccountTransaction.",
+                        example = "10009",
+                        name = "transactionId",
+                        required = true)
+            @PathVariable("transactionId") final Long transactionId){
+
+        AccountTransactionDto accountTransaction = fetchAccountTransactionService.getTransactionById(transactionId);
+        GeneralResponse<AccountTransactionDto> response = new GeneralResponse<>(true, accountTransaction);
+        return new ResponseEntity<>(response, HttpStatus.OK);
+
+    }
 
 
 //    @PostMapping("")
