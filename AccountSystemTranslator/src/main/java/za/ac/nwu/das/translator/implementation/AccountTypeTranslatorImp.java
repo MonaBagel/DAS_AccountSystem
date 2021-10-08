@@ -17,6 +17,7 @@ public class AccountTypeTranslatorImp implements AccountTypeTranslator {
 
     @Autowired
     public AccountTypeTranslatorImp(AccountTypeRepo accountTypeRepo){
+
         this.accountTypeRepo = accountTypeRepo;
     }
 

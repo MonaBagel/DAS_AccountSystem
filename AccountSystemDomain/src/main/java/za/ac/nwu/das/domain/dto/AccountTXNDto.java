@@ -1,38 +1,37 @@
 package za.ac.nwu.das.domain.dto;
 
 import io.swagger.annotations.ApiModelProperty;
-import za.ac.nwu.das.domain.persistence.AccountTransaction;
+import za.ac.nwu.das.domain.persistence.AccountTXN;
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.Objects;
 
-public class AccountTransactionDto implements Serializable {
+public class AccountTXNDto implements Serializable {
 
     private static final long serialVersionUID = 6444250063290608195L;
 
-    //private Long memberId;
     private Long transactionAmt;
     private LocalDate transactionDate;
 
-    public AccountTransactionDto() {
+    public AccountTXNDto() {
     }
 
-    public AccountTransactionDto(/*Long memberId,*/ Long transactionAmt, LocalDate transactionDate) {
-        //this.memberId = memberId;
+    public AccountTXNDto(Long transactionAmt, LocalDate transactionDate) {
         this.transactionAmt = transactionAmt;
         this.transactionDate = transactionDate;
     }
 
-    public AccountTransactionDto(AccountTransaction transaction){
+    public AccountTXNDto(AccountTXN transaction){
         this.setTransactionAmt(transaction.getTransactionAmt());
         this.setTransactionDate(transaction.getTransactionDate());
     }
 
     @ApiModelProperty(position = 1,
             value =  "AccountTransaction Amount",
-            name = "Mnemonic",
-            notes = "Total amount for transaction",
+            name = "Transaction Amount",
+            notes = "Total amount for transaction: negative numbers for subtraction, positive numbers for addition",
             dataType = "java.lang.Long",
-            example = "150",
+            example = "-150 or 150",
             allowEmptyValue = false,
             required = true)
     public long getTransactionAmt() {
@@ -59,13 +58,18 @@ public class AccountTransactionDto implements Serializable {
         this.transactionDate = transactionDate;
     }
 
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null || getClass() != obj.getClass()) return false;
+        AccountTXNDto that = (AccountTXNDto) obj;
+        return Objects.equals(transactionAmt, that.transactionAmt) && Objects.equals(transactionDate, that.transactionDate);
+    }
 
-
-
-
-
-
-
+    @Override
+    public int hashCode() {
+        return Objects.hash(transactionAmt, transactionDate);
+    }
 
     @Override
     public String toString() {

@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import za.ac.nwu.das.domain.dto.AccountTXNDto;
 import za.ac.nwu.das.domain.dto.AccountTypeDto;
 import za.ac.nwu.das.domain.service.GeneralResponse;
 import za.ac.nwu.das.logic.service.CreateAccountTypeService;
@@ -25,7 +26,8 @@ public class AccountTypeController {
     private final CreateAccountTypeService createAccountTypeService;
 
     @Autowired
-    public AccountTypeController(FetchAccountTypeService fetchAccountTypeService, CreateAccountTypeService createAccountTypeService){
+    public AccountTypeController(FetchAccountTypeService fetchAccountTypeService,
+                                 CreateAccountTypeService createAccountTypeService){
 
         this.fetchAccountTypeService = fetchAccountTypeService;
         this.createAccountTypeService = createAccountTypeService;
@@ -38,7 +40,7 @@ public class AccountTypeController {
                   @ApiResponse(code = 400, message = "Bad Request", response = GeneralResponse.class),
                   @ApiResponse(code = 404, message = "Not Found", response = GeneralResponse.class),
                   @ApiResponse(code = 500, message = "Internal Server Error", response = GeneralResponse.class)})
-    public ResponseEntity<GeneralResponse<List<AccountTypeDto>>> getAll(){
+    public ResponseEntity<GeneralResponse<List<AccountTypeDto>>> getAllAccountTypes(){
 
         List<AccountTypeDto> accountTypes = fetchAccountTypeService.getAllAccountTypes();
         GeneralResponse<List<AccountTypeDto>> response = new GeneralResponse<>(true, accountTypes);
@@ -46,14 +48,14 @@ public class AccountTypeController {
     }
 
 
-    @PostMapping("/createNew")
+    @PostMapping("/create")
     @ApiOperation(value = "Creates a new AccountType", notes = "Creates a new AccountType in the DB")
     @ApiResponses(value = {
             @ApiResponse(code = 201, message = "The accountType was created succesfully", response = GeneralResponse.class),
             @ApiResponse(code = 400, message = "Bad Request", response = GeneralResponse.class),
             @ApiResponse(code = 500, message = "Internal Server Error", response = GeneralResponse.class)
     })
-    public ResponseEntity<GeneralResponse<AccountTypeDto>> create(
+    public ResponseEntity<GeneralResponse<AccountTypeDto>> createAccountType(
             @ApiParam(value = "Request body to create a new Account Type.",
             required = true)
             @RequestBody AccountTypeDto accountType){
@@ -65,8 +67,8 @@ public class AccountTypeController {
         return new ResponseEntity<>(response, HttpStatus.CREATED);
     }
 
-    @GetMapping("/findSpecific {mnemonic}")
-    @ApiOperation(value = "Fetches the specific AccountType", notes = "Fetches the AccountType corresponding to the given mnemonic.")
+    @GetMapping("/findBy {mnemonic}")
+    @ApiOperation(value = "Fetches a specific AccountType", notes = "Fetches the AccountType corresponding to the given mnemonic.")
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "AccountType Found"),
             @ApiResponse(code = 400, message = "Bad Request", response = GeneralResponse.class),
@@ -86,6 +88,27 @@ public class AccountTypeController {
 
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
+
+//    @GetMapping("/viewAccountTypeValue")
+//    @ApiOperation(value = "Calculates total value of an Account Type for a member", notes = "Fetches AccountTransactions amounts corresponding AccountType and calculates the total value")
+//    @ApiResponses(value = {
+//            @ApiResponse(code = 200, message = "AccountType Value Calculated"),
+//            @ApiResponse(code = 400, message = "Bad Request", response = GeneralResponse.class),
+//            @ApiResponse(code = 404, message = "Failed To Calculate Total Value", response = GeneralResponse.class),
+//            @ApiResponse(code = 500, message = "Internal Server Error", response = GeneralResponse.class)
+//    })
+////    public ResponseEntity<GeneralResponse<AccountTXNDto>> calculateValue(){
+////        @ApiParam(value = "The mnemonic that uniquely identifies the AccountType",
+////                    example = "MILES",
+////                    name = "mnemonic",
+////                    required = true)
+////        @PathVariable("mnemonic") final String mnemonic){
+////
+////    AccountTypeDto account
+////        }
+////
+////
+////    }
 
 }
 

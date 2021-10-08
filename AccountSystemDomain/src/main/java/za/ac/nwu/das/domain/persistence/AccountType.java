@@ -1,9 +1,6 @@
 package za.ac.nwu.das.domain.persistence;
 
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import io.swagger.annotations.ApiModelProperty;
-
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Objects;
@@ -20,7 +17,7 @@ public class AccountType implements Serializable {
     private String accountTypeName;
     private String mnemonic;
 
-    private Set<AccountTransaction> accountTransactions;
+    private Set<AccountTXN> accountTXNS;
 
     public AccountType() {
     }
@@ -48,14 +45,14 @@ public class AccountType implements Serializable {
     @Column(name = "account_type_name")
     public String getAccountTypeName() { return accountTypeName; }
 
-    @OneToMany(targetEntity = AccountTransaction.class, fetch = FetchType.LAZY, mappedBy = "accountType", orphanRemoval = true, cascade = CascadeType.PERSIST)
-    public Set<AccountTransaction> getAccountTransactions(){
+    @OneToMany(targetEntity = AccountTXN.class, fetch = FetchType.LAZY, mappedBy = "accountType", orphanRemoval = true, cascade = CascadeType.PERSIST)
+    public Set<AccountTXN> getAccountTransactions(){
 
-        return accountTransactions;
+        return accountTXNS;
     }
 
-    public void setAccountTransactions(Set<AccountTransaction> accountTransactions) {
-        this.accountTransactions = accountTransactions;
+    public void setAccountTransactions(Set<AccountTXN> accountTXNS) {
+        this.accountTXNS = accountTXNS;
     }
 
     public void setAccountTypeId(Long accountTypeId) {
@@ -75,12 +72,12 @@ public class AccountType implements Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         AccountType that = (AccountType) o;
-        return Objects.equals(accountTypeId, that.accountTypeId) && Objects.equals(accountTypeName, that.accountTypeName) && Objects.equals(mnemonic, that.mnemonic) && Objects.equals(accountTransactions, that.accountTransactions);
+        return Objects.equals(accountTypeId, that.accountTypeId) && Objects.equals(accountTypeName, that.accountTypeName) && Objects.equals(mnemonic, that.mnemonic) && Objects.equals(accountTXNS, that.accountTXNS);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(accountTypeId, accountTypeName, mnemonic, accountTransactions);
+        return Objects.hash(accountTypeId, accountTypeName, mnemonic, accountTXNS);
     }
 
     @Override
@@ -89,7 +86,7 @@ public class AccountType implements Serializable {
                 "accountTypeId=" + accountTypeId +
                 ", accountTypeName='" + accountTypeName + '\'' +
                 ", mnemonic='" + mnemonic + '\'' +
-                ", accountTransactions=" + accountTransactions +
+                ", accountTransactions=" + accountTXNS +
                 '}';
     }
 

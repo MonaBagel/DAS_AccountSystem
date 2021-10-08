@@ -9,7 +9,7 @@ import java.util.Objects;
 
 @Entity
 @Table(name = "account_transaction"/*, schema = "proj1_das_demo"*/)
-public class AccountTransaction implements Serializable {
+public class AccountTXN implements Serializable {
 
     private static final long serialVersionUID = 6926049907460965566L;
 
@@ -21,10 +21,10 @@ public class AccountTransaction implements Serializable {
     private LocalDate transactionDate;
 
 
-    public AccountTransaction() {
+    public AccountTXN() {
     }
 
-    public AccountTransaction(Long transactionId, /*Long accountTypeId,*/ AccountType accountType, Long memberId, Long transactionAmt, LocalDate transactionDate) {
+    public AccountTXN(Long transactionId, /*Long accountTypeId,*/ AccountType accountType, Long memberId, Long transactionAmt, LocalDate transactionDate) {
         this.transactionId = transactionId;
         //this.accountTypeId = accountTypeId;
         this.accountType = accountType;
@@ -97,7 +97,7 @@ public class AccountTransaction implements Serializable {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        AccountTransaction that = (AccountTransaction) o;
+        AccountTXN that = (AccountTXN) o;
         return Objects.equals(transactionId, that.transactionId) && Objects.equals(accountType, that.accountType) && Objects.equals(memberId, that.memberId) && Objects.equals(transactionAmt, that.transactionAmt) && Objects.equals(transactionDate, that.transactionDate);
     }
 
