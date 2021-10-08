@@ -1,15 +1,13 @@
 package za.ac.nwu.das.domain.dto;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import io.swagger.annotations.ApiModelProperty;
-import za.ac.nwu.das.domain.persistence.AccountTXN;
+import za.ac.nwu.das.domain.persistence.AccountTransaction;
 import za.ac.nwu.das.domain.persistence.AccountType;
 
 import java.io.Serializable;
 import java.time.LocalDate;
-import java.util.Objects;
 
-public class AccountTXNDto implements Serializable {
+public class AccountTransactionDto implements Serializable {
 
     private static final long serialVersionUID = 6444250063290608195L;
 
@@ -19,10 +17,10 @@ public class AccountTXNDto implements Serializable {
     private Long transactionAmt;
     private LocalDate transactionDate;
 
-    public AccountTXNDto() {
+    public AccountTransactionDto() {
     }
 
-    public AccountTXNDto(Long transactionId, String accountTypeMnemonic, Long memberId, Long transactionAmt, LocalDate transactionDate) {
+    public AccountTransactionDto(Long transactionId, String accountTypeMnemonic, Long memberId, Long transactionAmt, LocalDate transactionDate) {
         this.transactionId = transactionId;
         this.accountTypeMnemonic = accountTypeMnemonic;
         this.memberId = memberId;
@@ -30,17 +28,17 @@ public class AccountTXNDto implements Serializable {
         this.transactionDate = transactionDate;
     }
 
-    public AccountTXNDto(AccountTXN accountTXN) {
-        this.transactionId = accountTXN.getTransactionId();
-        this.accountTypeMnemonic = accountTXN.getAccountType().getMnemonic();
-        this.memberId = accountTXN.getMemberId();
-        this.transactionAmt = accountTXN.getTransactionAmt();
-        this.transactionDate = accountTXN.getTransactionDate();
+    public AccountTransactionDto(AccountTransaction accountTransaction) {
+        this.transactionId = accountTransaction.getTransactionId();
+        this.accountTypeMnemonic = accountTransaction.getAccountType().getMnemonic();
+        this.memberId = accountTransaction.getMemberId();
+        this.transactionAmt = accountTransaction.getTransactionAmt();
+        this.transactionDate = accountTransaction.getTransactionDate();
     }
 
     @JsonIgnore
-    public AccountTXN buildAccountTransaction(AccountType accountType){
-        return new AccountTXN(this.getTransactionId(), accountType, this.getMemberId(),
+    public AccountTransaction buildAccountTransaction(AccountType accountType){
+        return new AccountTransaction(this.getTransactionId(), accountType, this.getMemberId(),
                 this.getTransactionAmt(), this.getTransactionDate());
     }
 

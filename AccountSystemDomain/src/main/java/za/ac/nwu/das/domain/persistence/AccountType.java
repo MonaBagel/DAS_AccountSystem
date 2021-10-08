@@ -17,7 +17,7 @@ public class AccountType implements Serializable {
     private String accountTypeName;
     private String mnemonic;
 
-    private Set<AccountTXN> accountTXNS;
+    private Set<AccountTransaction> accountTransactions;
 
     public AccountType() {
     }
@@ -45,14 +45,14 @@ public class AccountType implements Serializable {
     @Column(name = "account_type_name")
     public String getAccountTypeName() { return accountTypeName; }
 
-    @OneToMany(targetEntity = AccountTXN.class, fetch = FetchType.LAZY, mappedBy = "accountType", orphanRemoval = true, cascade = CascadeType.PERSIST)
-    public Set<AccountTXN> getAccountTransactions(){
+    @OneToMany(targetEntity = AccountTransaction.class, fetch = FetchType.LAZY, mappedBy = "accountType", orphanRemoval = true, cascade = CascadeType.PERSIST)
+    public Set<AccountTransaction> getAccountTransactions(){
 
-        return accountTXNS;
+        return accountTransactions;
     }
 
-    public void setAccountTransactions(Set<AccountTXN> accountTXNS) {
-        this.accountTXNS = accountTXNS;
+    public void setAccountTransactions(Set<AccountTransaction> accountTransactions) {
+        this.accountTransactions = accountTransactions;
     }
 
     public void setAccountTypeId(Long accountTypeId) {
@@ -72,12 +72,12 @@ public class AccountType implements Serializable {
         if (this == obj) return true;
         if (obj == null || getClass() != obj.getClass()) return false;
         AccountType that = (AccountType) obj;
-        return Objects.equals(accountTypeId, that.accountTypeId) && Objects.equals(accountTypeName, that.accountTypeName) && Objects.equals(mnemonic, that.mnemonic) && Objects.equals(accountTXNS, that.accountTXNS);
+        return Objects.equals(accountTypeId, that.accountTypeId) && Objects.equals(accountTypeName, that.accountTypeName) && Objects.equals(mnemonic, that.mnemonic) && Objects.equals(accountTransactions, that.accountTransactions);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(accountTypeId, accountTypeName, mnemonic, accountTXNS);
+        return Objects.hash(accountTypeId, accountTypeName, mnemonic, accountTransactions);
     }
 
     @Override
@@ -86,7 +86,7 @@ public class AccountType implements Serializable {
                 "accountTypeId=" + accountTypeId +
                 ", accountTypeName='" + accountTypeName + '\'' +
                 ", mnemonic='" + mnemonic + '\'' +
-                ", accountTransactions=" + accountTXNS +
+                ", accountTransactions=" + accountTransactions +
                 '}';
     }
 
