@@ -17,8 +17,8 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 import java.util.Collections;
 
 @Configuration
-//@EnableSwagger2
-//@Import(springfox.bean.validators.configuration.BeanValidatorPluginsConfiguration.class)
+@EnableSwagger2
+@Import(springfox.bean.validators.configuration.BeanValidatorPluginsConfiguration.class)
 public class SwaggerConfig{
 
     @Value("${swagger.application.version}")
@@ -30,7 +30,7 @@ public class SwaggerConfig{
 
     @Bean
     public Docket api(){
-        return new Docket(DocumentationType.SWAGGER_2)/*.OAS_30*/
+        return new Docket(DocumentationType.SWAGGER_2)
                 .select()
                 .apis(RequestHandlerSelectors.withClassAnnotation(RestController.class))
                 .paths(PathSelectors.any())
@@ -38,6 +38,8 @@ public class SwaggerConfig{
                 .pathMapping("/")
                 .apiInfo(apiInfo());
     }
+
+    //localhost:8080/account-system/mvc
 
     private ApiInfo apiInfo() {
         return new ApiInfo(

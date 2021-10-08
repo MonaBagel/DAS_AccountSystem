@@ -7,10 +7,7 @@ import io.swagger.annotations.ApiResponses;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import za.ac.nwu.das.domain.dto.AccountTXNDto;
 import za.ac.nwu.das.domain.service.GeneralResponse;
 import za.ac.nwu.das.logic.service.CreateAccountTXNService;
@@ -34,11 +31,26 @@ public class AccountTransactionController {
         //this.createAccountTXNService = createAccountTXNService;
     }
 
-//    public ResponseEntity<GeneralResponse<List<AccountTXNDto>>> getAllTransactions(){
+    @GetMapping("/all")
+    @ApiOperation(value = "Gets all Account Transactions", notes = "Returns a list of account type.")
+    @ApiResponses(value ={
+                    @ApiResponse(code = 200, message = "Transactions Returned", response = GeneralResponse.class),
+                    @ApiResponse(code = 400, message = "Bad Request", response = GeneralResponse.class),
+                    @ApiResponse(code = 404, message = "Not Found", response = GeneralResponse.class),
+                    @ApiResponse(code = 500, message = "Internal Server Error", response = GeneralResponse.class)})
+    public ResponseEntity<GeneralResponse<List<AccountTXNDto>>> getAllTransactions(){
+
+        List<AccountTXNDto> transactions = fetchAccountTXNService.getAllTransactions();
+        GeneralResponse<List<AccountTXNDto>> response = new GeneralResponse<>(true, transactions);
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }
+
+//    @GetMapping("{transactionId}")
+//    public ResponseEntity<GeneralResponse<AccountTXNDto>> createTransaction(){
 //
 //    }
 
-    @GetMapping("/findBy {AccountType mnemonic}")
+    @GetMapping("/{mnemonic}")
     @ApiOperation(value = "Fetches transactions for a specific AccountType", notes = "Fetches AccountTransactions corresponding to the given AccountType mnemonic.")
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "AccountType Transactions Found"),
@@ -58,18 +70,50 @@ public class AccountTransactionController {
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
+//    @PostMapping("")
+//    public ResponseEntity<GeneralResponse<AccountTXNDto>> createTransaction(){
+//
+//    }
 
+//    @GetMapping("/{mnemonic}")
 //    public ResponseEntity<GeneralResponse<AccountTXNDto>> createTransaction(){
 //
 //    }
 
 
+
+
+
+
+
+
+
+
+    //getTransaction()                                       gets a specific AccountTransaction
     //getAllTransactions()
     //createNewTransaction()
-    //subractAmountTransaction()
-    //addAmountTransaction()
 
 
+//    @GetMapping("/viewAccountTypeValue")
+//    @ApiOperation(value = "Calculates total value of an Account Type for a member", notes = "Fetches AccountTransactions amounts corresponding AccountType and calculates the total value")
+//    @ApiResponses(value = {
+//            @ApiResponse(code = 200, message = "AccountType Value Calculated"),
+//            @ApiResponse(code = 400, message = "Bad Request", response = GeneralResponse.class),
+//            @ApiResponse(code = 404, message = "Failed To Calculate Total Value", response = GeneralResponse.class),
+//            @ApiResponse(code = 500, message = "Internal Server Error", response = GeneralResponse.class)
+//    })
+////    public ResponseEntity<GeneralResponse<AccountTXNDto>> calculateValue(){
+////        @ApiParam(value = "The mnemonic that uniquely identifies the AccountType",
+////                    example = "MILES",
+////                    name = "mnemonic",
+////                    required = true)
+////        @PathVariable("mnemonic") final String mnemonic){
+////
+////    AccountTypeDto account
+////        }
+////
+////
+////    }
 
 
 

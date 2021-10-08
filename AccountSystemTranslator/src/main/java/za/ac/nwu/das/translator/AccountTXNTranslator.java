@@ -6,5 +6,7 @@ import java.util.List;
 
 public interface AccountTXNTranslator {
 
+    List<AccountTXNDto> getAllTransactions();
+
     List<AccountTXNDto> getAllAccountTypeTransactions(String mnemonic);
 }

@@ -21,6 +21,13 @@ public class FetchAccountTXNServiceImp implements FetchAccountTXNService {
         this.accountTXNTranslator = accountTXNTranslator;
     }
 
+    @Override
+    public List<AccountTXNDto> getAllTransactions(){
+
+        return accountTXNTranslator.getAllTransactions();
+    }
+
+
 
     @Override
     public List<AccountTXNDto> getAllAccountTypeTransactions(String mnemonic){

@@ -5,5 +5,7 @@ import java.util.List;
 
 public interface FetchAccountTXNService {
 
+    List<AccountTXNDto> getAllTransactions();
+
     List<AccountTXNDto> getAllAccountTypeTransactions(String mnemonic);
 }

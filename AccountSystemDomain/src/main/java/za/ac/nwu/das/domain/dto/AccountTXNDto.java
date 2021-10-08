@@ -1,7 +1,10 @@
 package za.ac.nwu.das.domain.dto;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import io.swagger.annotations.ApiModelProperty;
 import za.ac.nwu.das.domain.persistence.AccountTXN;
+import za.ac.nwu.das.domain.persistence.AccountType;
+
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.Objects;
@@ -10,72 +13,60 @@ public class AccountTXNDto implements Serializable {
 
     private static final long serialVersionUID = 6444250063290608195L;
 
+    private Long transactionId;
+    private String accountTypeMnemonic;
+    private Long memberId;
     private Long transactionAmt;
     private LocalDate transactionDate;
 
     public AccountTXNDto() {
     }
 
-    public AccountTXNDto(Long transactionAmt, LocalDate transactionDate) {
+    public AccountTXNDto(Long transactionId, String accountTypeMnemonic, Long memberId, Long transactionAmt, LocalDate transactionDate) {
+        this.transactionId = transactionId;
+        this.accountTypeMnemonic = accountTypeMnemonic;
+        this.memberId = memberId;
         this.transactionAmt = transactionAmt;
         this.transactionDate = transactionDate;
     }
 
-    public AccountTXNDto(AccountTXN transaction){
-        this.setTransactionAmt(transaction.getTransactionAmt());
-        this.setTransactionDate(transaction.getTransactionDate());
+    public AccountTXNDto(AccountTXN accountTXN) {
+        this.transactionId = accountTXN.getTransactionId();
+        this.accountTypeMnemonic = accountTXN.getAccountType().getMnemonic();
+        this.memberId = accountTXN.getMemberId();
+        this.transactionAmt = accountTXN.getTransactionAmt();
+        this.transactionDate = accountTXN.getTransactionDate();
     }
 
-    @ApiModelProperty(position = 1,
-            value =  "AccountTransaction Amount",
-            name = "Transaction Amount",
-            notes = "Total amount for transaction: negative numbers for subtraction, positive numbers for addition",
-            dataType = "java.lang.Long",
-            example = "-150 or 150",
-            allowEmptyValue = false,
-            required = true)
-    public long getTransactionAmt() {
-        return transactionAmt;
+    @JsonIgnore
+    public AccountTXN buildAccountTransaction(AccountType accountType){
+        return new AccountTXN(this.getTransactionId(), accountType, this.getMemberId(),
+                this.getTransactionAmt(), this.getTransactionDate());
     }
 
-    public void setTransactionAmt(Long transactionAmt) {
-        this.transactionAmt = transactionAmt;
-    }
+    public Long getTransactionId() { return transactionId; }
 
-    @ApiModelProperty(position = 2,
-            value =  "AccountTransaction Amount",
-            name = "Mnemonic",
-            notes = "Total amount for transaction",
-            dataType = "java.lang.Long",
-            example = "2021-01-01",
-            allowEmptyValue = true,
-            required = false)
-    public LocalDate getTransactionDate() {
-        return transactionDate;
-    }
+    public void setTransactionId(Long transactionId) { this.transactionId = transactionId; }
 
-    public void setTransactionDate(LocalDate transactionDate) {
-        this.transactionDate = transactionDate;
-    }
 
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj) return true;
-        if (obj == null || getClass() != obj.getClass()) return false;
-        AccountTXNDto that = (AccountTXNDto) obj;
-        return Objects.equals(transactionAmt, that.transactionAmt) && Objects.equals(transactionDate, that.transactionDate);
-    }
+    public String getAccountTypeMnemonic() { return accountTypeMnemonic; }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(transactionAmt, transactionDate);
-    }
+    public void setAccountTypeMnemonic(String accountTypeMnemonic) { this.accountTypeMnemonic = accountTypeMnemonic; }
 
-    @Override
-    public String toString() {
-        return "AccountTransactionDto{" +
-                "transactionAmt=" + transactionAmt +
-                ", transactionDate=" + transactionDate +
-                '}';
-    }
+
+    public Long getMemberId() { return memberId; }
+
+    public void setMemberId(Long memberId) { this.memberId = memberId; }
+
+
+    public Long getTransactionAmt() { return transactionAmt; }
+
+    public void setTransactionAmt(Long transactionAmt) { this.transactionAmt = transactionAmt; }
+
+
+    public LocalDate getTransactionDate() { return transactionDate; }
+
+    public void setTransactionDate(LocalDate transactionDate) { this.transactionDate = transactionDate; }
+
+
 }

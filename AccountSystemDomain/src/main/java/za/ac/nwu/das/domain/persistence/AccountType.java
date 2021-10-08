@@ -7,7 +7,7 @@ import java.util.Objects;
 import java.util.Set;
 
 @Entity
-@Table(name = "account_type"/*, schema = "proj1_das_demo"*/)
+@Table(name = "account_type", schema = "proj1_das_demo")
 public class AccountType implements Serializable {
 
     private static final long serialVersionUID = 2566762841659265490L;
@@ -68,10 +68,10 @@ public class AccountType implements Serializable {
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        AccountType that = (AccountType) o;
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null || getClass() != obj.getClass()) return false;
+        AccountType that = (AccountType) obj;
         return Objects.equals(accountTypeId, that.accountTypeId) && Objects.equals(accountTypeName, that.accountTypeName) && Objects.equals(mnemonic, that.mnemonic) && Objects.equals(accountTXNS, that.accountTXNS);
     }
 

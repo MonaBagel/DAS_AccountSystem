@@ -3,13 +3,13 @@ package za.ac.nwu.das.domain.dto;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import za.ac.nwu.das.domain.persistence.AccountTXN;
 import za.ac.nwu.das.domain.persistence.AccountType;
 import java.io.Serializable;
 import java.util.Objects;
 
 @ApiModel(value = "AccountType",
-        description = "A DTO that represents AccountType"
-)
+        description = "A DTO that represents AccountType")
 public class AccountTypeDto implements Serializable {
 
     private static final long serialVersionUID = -4472156901973962350L;
@@ -26,8 +26,13 @@ public class AccountTypeDto implements Serializable {
     }
 
     public AccountTypeDto(AccountType accountType){
-        this.setAccountTypeName(accountType.getAccountTypeName());
-        this.setMnemonic(accountType.getMnemonic());
+        this.mnemonic = accountType.getMnemonic();
+        this.accountTypeName = accountType.getAccountTypeName();
+    }
+
+    @JsonIgnore
+    public AccountType getAccountType() {
+        return new AccountType(this.getMnemonic(), this.getAccountTypeName());
     }
 
     @ApiModelProperty(position = 1,
@@ -52,7 +57,6 @@ public class AccountTypeDto implements Serializable {
             notes = "The name of the AccountType",
             dataType = "java.lang.String",
             example = "Miles",
-            allowEmptyValue = false,
             required = true)
     public String getAccountTypeName(){
 
@@ -84,10 +88,6 @@ public class AccountTypeDto implements Serializable {
                 '}';
     }
 
-    @JsonIgnore
-    public AccountType getAccountType() {
-        return new AccountType(getMnemonic(), getAccountTypeName());
-    }
 
 
 }

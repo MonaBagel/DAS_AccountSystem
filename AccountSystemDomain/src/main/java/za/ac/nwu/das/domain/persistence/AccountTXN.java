@@ -8,13 +8,12 @@ import java.time.LocalDate;
 import java.util.Objects;
 
 @Entity
-@Table(name = "account_transaction"/*, schema = "proj1_das_demo"*/)
+@Table(name = "account_transaction", schema = "proj1_das_demo")
 public class AccountTXN implements Serializable {
 
     private static final long serialVersionUID = 6926049907460965566L;
 
     private Long transactionId;
-    //private Long accountTypeId;
     private AccountType accountType;
     private Long memberId;
     private Long transactionAmt;
@@ -24,9 +23,8 @@ public class AccountTXN implements Serializable {
     public AccountTXN() {
     }
 
-    public AccountTXN(Long transactionId, /*Long accountTypeId,*/ AccountType accountType, Long memberId, Long transactionAmt, LocalDate transactionDate) {
+    public AccountTXN(Long transactionId, AccountType accountType, Long memberId, Long transactionAmt, LocalDate transactionDate) {
         this.transactionId = transactionId;
-        //this.accountTypeId = accountTypeId;
         this.accountType = accountType;
         this.memberId = memberId;
         this.transactionAmt = transactionAmt;
@@ -40,58 +38,31 @@ public class AccountTXN implements Serializable {
         return transactionId;
     }
 
-//    @Column(name = "account_type_id")
-//    public Long getAccountTypeId() {
-//        return accountTypeId;
-//    }
+    @Column(name = "member_id") public Long getMemberId() { return memberId; }
+
+    @Column(name = "transaction_amount")
+    public Long getTransactionAmt() { return transactionAmt; }
+
+    @Column(name = "transaction_date")
+    public LocalDate getTransactionDate() { return transactionDate; }
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "account_type_id")
-    public AccountType getAccountType() {
+    public AccountType getAccountType() { return accountType; }
 
-        return accountType;
-    }
 
-    public void setAccountType(AccountType accountType) {
+    public void setAccountType(AccountType accountType) { this.accountType = accountType; }
 
-        this.accountType = accountType;
-    }
-
-    @Column(name = "member_id")
-    public Long getMemberId() {
-        return memberId;
-    }
-
-    @Column(name = "transaction_amount")
-    public Long getTransactionAmt() {
-
-        return transactionAmt;
-    }
-
-    @Column(name = "transaction_date")
-    public LocalDate getTransactionDate() {
-
-        return transactionDate;
-    }
-
-    public void setTransactionId(Long transactionId) {
-
-        this.transactionId = transactionId;
-    }
+    public void setTransactionId(Long transactionId) { this.transactionId = transactionId; }
 
     public void setMemberId(Long memberId) {
         this.memberId = memberId;
     }
 
-    public void setTransactionAmt(Long transactionAmt) {
+    public void setTransactionAmt(Long transactionAmt) { this.transactionAmt = transactionAmt; }
 
-        this.transactionAmt = transactionAmt;
-    }
+    public void setTransactionDate(LocalDate transactionDate) { this.transactionDate = transactionDate; }
 
-    public void setTransactionDate(LocalDate transactionDate) {
-
-        this.transactionDate = transactionDate;
-    }
 
     @Override
     public boolean equals(Object o) {

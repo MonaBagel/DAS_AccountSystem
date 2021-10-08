@@ -33,7 +33,7 @@ public class AccountTypeController {
         this.createAccountTypeService = createAccountTypeService;
     }
 
-    @GetMapping("/getAll")
+    @GetMapping("/all")
     @ApiOperation(value = "Gets all the configured Account Types.", notes = "Returns a list of account types.")
     @ApiResponses(value ={
                   @ApiResponse(code = 200, message = "Account types returned", response = GeneralResponse.class),
@@ -48,7 +48,7 @@ public class AccountTypeController {
     }
 
 
-    @PostMapping("/create")
+    @PostMapping("")
     @ApiOperation(value = "Creates a new AccountType", notes = "Creates a new AccountType in the DB")
     @ApiResponses(value = {
             @ApiResponse(code = 201, message = "The accountType was created succesfully", response = GeneralResponse.class),
@@ -67,7 +67,7 @@ public class AccountTypeController {
         return new ResponseEntity<>(response, HttpStatus.CREATED);
     }
 
-    @GetMapping("/findBy {mnemonic}")
+    @GetMapping("/{mnemonic}")
     @ApiOperation(value = "Fetches a specific AccountType", notes = "Fetches the AccountType corresponding to the given mnemonic.")
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "AccountType Found"),
@@ -89,26 +89,32 @@ public class AccountTypeController {
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
-//    @GetMapping("/viewAccountTypeValue")
-//    @ApiOperation(value = "Calculates total value of an Account Type for a member", notes = "Fetches AccountTransactions amounts corresponding AccountType and calculates the total value")
+    //Updates an accountType
+//    @PutMapping("/{mnemonic}")
+//    @ApiOperation(value = "Fetches a specific AccountType", notes = "Fetches the AccountType corresponding to the given mnemonic.")
 //    @ApiResponses(value = {
-//            @ApiResponse(code = 200, message = "AccountType Value Calculated"),
+//            @ApiResponse(code = 200, message = "AccountType Found"),
 //            @ApiResponse(code = 400, message = "Bad Request", response = GeneralResponse.class),
-//            @ApiResponse(code = 404, message = "Failed To Calculate Total Value", response = GeneralResponse.class),
+//            @ApiResponse(code = 404, message = "AccountType Not Found", response = GeneralResponse.class),
 //            @ApiResponse(code = 500, message = "Internal Server Error", response = GeneralResponse.class)
 //    })
-////    public ResponseEntity<GeneralResponse<AccountTXNDto>> calculateValue(){
-////        @ApiParam(value = "The mnemonic that uniquely identifies the AccountType",
-////                    example = "MILES",
-////                    name = "mnemonic",
-////                    required = true)
-////        @PathVariable("mnemonic") final String mnemonic){
-////
-////    AccountTypeDto account
-////        }
-////
-////
-////    }
+//    public ResponseEntity<GeneralResponse<AccountTypeDto>> updateAccountType(
+//            @ApiParam(value = "The mnemonic that uniquely identifies the AccountType",
+//                    example = "MILES",
+//                    name = "mnemonic",
+//                    required = true)
+//            @PathVariable ("mnemonic") final String mnemonic){
+//
+//        AccountTypeDto accountType = fetchAccountTypeService.getAccountTypeByMnemonic(mnemonic);
+//
+//        GeneralResponse<AccountTypeDto> response = new GeneralResponse<>(true, accountType);
+//
+//        return new ResponseEntity<>(response, HttpStatus.OK);
+//    }
+
+
+
+
 
 }
 

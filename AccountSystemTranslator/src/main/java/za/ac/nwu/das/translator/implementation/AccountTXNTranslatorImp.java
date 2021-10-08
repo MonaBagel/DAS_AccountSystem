@@ -23,6 +23,23 @@ public class AccountTXNTranslatorImp implements AccountTXNTranslator {
         this.accountTXNRepo = accountTXNRepo;
     }
 
+    @Override
+    public List<AccountTXNDto> getAllTransactions(){
+
+        List<AccountTXNDto> accountTXNDtos = new ArrayList<>();
+        try{
+            for(AccountTXN accountTransaction : accountTXNRepo.findAll()){
+                accountTXNDtos.add(new AccountTXNDto(accountTransaction));
+            }
+        }catch (Exception ex){
+            //TODO: log
+            throw new RuntimeException("Unable to read from the DB", ex);
+        }
+        return accountTXNDtos;
+    }
+
+
+
 
     @Override
     public List<AccountTXNDto> getAllAccountTypeTransactions(String mnemonic){
