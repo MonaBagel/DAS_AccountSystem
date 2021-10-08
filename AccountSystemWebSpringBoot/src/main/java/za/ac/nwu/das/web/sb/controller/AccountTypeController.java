@@ -69,15 +69,13 @@ public class AccountTypeController {
 
 
     @PostMapping("")
-    @ApiOperation(value = "Creates a new AccountType", notes = "Creates a new AccountType in the DB")
+    @ApiOperation(value = "Creates a new AccountType", notes = "Creates a new AccountType in the DB.")
     @ApiResponses(value = {
-            @ApiResponse(code = 201, message = "The accountType was created succesfully", response = GeneralResponse.class),
+            @ApiResponse(code = 201, message = "The AccountType was created succesfully", response = GeneralResponse.class),
             @ApiResponse(code = 400, message = "Bad Request", response = GeneralResponse.class),
-            @ApiResponse(code = 500, message = "Internal Server Error", response = GeneralResponse.class)
-    })
+            @ApiResponse(code = 500, message = "Internal Server Error", response = GeneralResponse.class)})
     public ResponseEntity<GeneralResponse<AccountTypeDto>> create(
-            @ApiParam(value = "Request body to create a new Account Type.",
-            required = true)
+            @ApiParam(value = "Request body to create a new Account Type.", required = true)
             @RequestBody AccountTypeDto accountType){
 
         AccountTypeDto accountTypeResponse = createAccountTypeService.createAccountType(accountType);

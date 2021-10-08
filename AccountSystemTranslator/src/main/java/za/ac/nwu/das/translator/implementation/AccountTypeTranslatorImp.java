@@ -48,7 +48,7 @@ public class AccountTypeTranslatorImp implements AccountTypeTranslator {
 
 
     @Override
-    public AccountTypeDto create(AccountTypeDto accountTypeDto) {
+    public AccountTypeDto createAccountType(AccountTypeDto accountTypeDto) {
 
         try{
             AccountType accountType = accountTypeRepo.save(accountTypeDto.getAccountType());
@@ -60,14 +60,4 @@ public class AccountTypeTranslatorImp implements AccountTypeTranslator {
 
     }
 
-
-
-//    @Override
-//    public AccountTypeDto getAccountTypeDtoByMnemonic(String mnemonic){
-//        try{
-//            return accountTypeRepo.getAccountTypeDtoByMnemonic(mnemonic);
-//        }catch(Exception ex){
-//            throw new RuntimeException("Unable to read from the DB", ex);
-//        }
-//    }
 }

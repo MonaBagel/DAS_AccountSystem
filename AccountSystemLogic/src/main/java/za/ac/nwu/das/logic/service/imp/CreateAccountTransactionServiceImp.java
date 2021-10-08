@@ -1,13 +1,11 @@
 package za.ac.nwu.das.logic.service.imp;
 
 import org.springframework.stereotype.Component;
-import za.ac.nwu.das.domain.dto.AccountTransactionDto;
-import za.ac.nwu.das.domain.dto.AccountTypeDto;
 import za.ac.nwu.das.logic.service.CreateAccountTransactionService;
 import za.ac.nwu.das.translator.AccountTransactionTranslator;
-
 import javax.transaction.Transactional;
 
+@Transactional
 @Component
 public class CreateAccountTransactionServiceImp implements CreateAccountTransactionService {
 

@@ -4,9 +4,9 @@ import org.springframework.stereotype.Component;
 import za.ac.nwu.das.domain.dto.AccountTypeDto;
 import za.ac.nwu.das.logic.service.CreateAccountTypeService;
 import za.ac.nwu.das.translator.AccountTypeTranslator;
-
 import javax.transaction.Transactional;
 
+@Transactional
 @Component
 public class CreateAccountTypeServiceImp implements CreateAccountTypeService {
 
@@ -17,12 +17,13 @@ public class CreateAccountTypeServiceImp implements CreateAccountTypeService {
     }
 
     @Override
-    public AccountTypeDto createAccountType(AccountTypeDto accountType){
+    public AccountTypeDto createAccountType(AccountTypeDto accountTypeDto){
 
 //        if (null == accountTransaction.getTransactionDate()){
 //            accountTransaction.setTransactionDate(LocalDate.now());
 //        }
-        return accountTypeTranslator.create(accountType);
+
+        return accountTypeTranslator.createAccountType(accountTypeDto);
     }
 
 }

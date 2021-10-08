@@ -25,13 +25,8 @@ public class AccountTypeDto implements Serializable {
     }
 
     public AccountTypeDto(AccountType accountType){
-        this.mnemonic = accountType.getMnemonic();
-        this.accountTypeName = accountType.getAccountTypeName();
-    }
-
-    @JsonIgnore
-    public AccountType getAccountType() {
-        return new AccountType(this.getMnemonic(), this.getAccountTypeName());
+        this.setAccountTypeName(accountType.getAccountTypeName());
+        this.setMnemonic(accountType.getMnemonic());
     }
 
     @ApiModelProperty(position = 1,
@@ -40,7 +35,6 @@ public class AccountTypeDto implements Serializable {
             notes = "Uniquely identifies the account type",
             dataType = "java.lang.String",
             example = "MILES",
-            allowEmptyValue = false,
             required = true)
     public String getMnemonic(){
         return mnemonic;
@@ -57,10 +51,7 @@ public class AccountTypeDto implements Serializable {
             dataType = "java.lang.String",
             example = "Miles",
             required = true)
-    public String getAccountTypeName(){
-
-        return accountTypeName;
-    }
+    public String getAccountTypeName(){ return accountTypeName; }
 
     private void setAccountTypeName(String accountTypeName) {
         this.accountTypeName = accountTypeName;
@@ -72,6 +63,11 @@ public class AccountTypeDto implements Serializable {
         if (obj == null || getClass() != obj.getClass()) return false;
         AccountTypeDto that = (AccountTypeDto) obj;
         return Objects.equals(mnemonic, that.mnemonic) && Objects.equals(accountTypeName, that.accountTypeName);
+    }
+
+    @JsonIgnore
+    public AccountType getAccountType() {
+        return new AccountType(this.getMnemonic(), this.getAccountTypeName());
     }
 
     @Override
@@ -86,7 +82,5 @@ public class AccountTypeDto implements Serializable {
                 ", accountTypeName='" + accountTypeName + '\'' +
                 '}';
     }
-
-
 
 }
