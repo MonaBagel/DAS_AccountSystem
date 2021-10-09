@@ -9,5 +9,6 @@ public interface FetchAccountTransactionService {
 
     AccountTransactionDto getTransactionById(Long transactionId);
 
-    //Long getTotalValueOfMnemonic(String mnemonic);
+    Long getTotalValueOfMnemonic(String mnemonic);
+
 }

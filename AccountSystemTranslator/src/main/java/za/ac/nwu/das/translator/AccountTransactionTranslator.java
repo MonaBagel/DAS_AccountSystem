@@ -14,5 +14,6 @@ public interface AccountTransactionTranslator{
 
     AccountTransaction save(AccountTransaction accountTransaction);
 
-    //Long getTotalValueOfMnemonic(String mnemonic);
+    Long getTotalValueOfMnemonic(String mnemonic);
+
 }

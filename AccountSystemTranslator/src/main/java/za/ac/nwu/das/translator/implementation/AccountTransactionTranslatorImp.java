@@ -57,14 +57,14 @@ public class AccountTransactionTranslatorImp implements AccountTransactionTransl
         }
     }
 
-//    @Override
-//    public Long getTotalValueOfMnemonic(String mnemonic) {
-//        try{
-//            //Long totalValue = accountTransactionRepo.getTotalValueOfMnemonic(mnemonic);
-//            return null;
-//        } catch (Exception ex) {
-//            throw new RuntimeException("Unable to read from the DB", ex);
-//        }
-//    }
+    @Override
+    public Long getTotalValueOfMnemonic(String mnemonic) {
+        try{
+            return accountTransactionRepo.getTotalValueOfMnemonic(mnemonic);
+        }catch (Exception ex){
+            throw new RuntimeException("Unable to save to the DB", ex);
+        }
+    }
+
 
 }

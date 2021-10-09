@@ -5,7 +5,6 @@ import za.ac.nwu.das.domain.dto.AccountTransactionDto;
 import za.ac.nwu.das.domain.persistence.AccountTransaction;
 import za.ac.nwu.das.domain.persistence.AccountType;
 import za.ac.nwu.das.logic.service.CreateAccountTransactionService;
-import za.ac.nwu.das.logic.service.FetchAccountTransactionService;
 import za.ac.nwu.das.logic.service.FetchAccountTypeService;
 import za.ac.nwu.das.translator.AccountTransactionTranslator;
 import za.ac.nwu.das.translator.AccountTypeTranslator;
