@@ -1,7 +1,6 @@
 package za.ac.nwu.das.domain.dto;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import za.ac.nwu.das.domain.persistence.AccountType;
 import java.io.Serializable;

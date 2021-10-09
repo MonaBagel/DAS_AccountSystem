@@ -39,5 +39,7 @@ public class FetchAccountTypeServiceImp implements FetchAccountTypeService {
     }
 
 
-
+    public boolean methodToTest() {
+        return true;
+    }
 }
