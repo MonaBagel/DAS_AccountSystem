@@ -8,4 +8,6 @@ public interface FetchAccountTransactionService {
     List<AccountTransactionDto> getAllTransactions();
 
     AccountTransactionDto getTransactionById(Long transactionId);
+
+    Long getTotalValueOfMnemonic(String mnemonic);
 }

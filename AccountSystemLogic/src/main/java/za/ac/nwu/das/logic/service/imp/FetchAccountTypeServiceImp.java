@@ -34,9 +34,8 @@ public class FetchAccountTypeServiceImp implements FetchAccountTypeService {
     }
 
     @Override
-    public AccountType getAccountTypeByDbEntityMnemonic(String mnemonic) {
-
-        return null;
+    public AccountType getAccountTypeByDbEntityMnemonic(String accountTypeMnemonic) {
+        return accountTypeTranslator.getAccountTypeByDbEntityMnemonic(accountTypeMnemonic);
     }
 
 

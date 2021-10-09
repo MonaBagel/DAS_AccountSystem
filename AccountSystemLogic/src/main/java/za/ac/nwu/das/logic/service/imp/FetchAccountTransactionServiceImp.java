@@ -38,4 +38,10 @@ public class FetchAccountTransactionServiceImp implements FetchAccountTransactio
         return null != transaction ? new AccountTransactionDto(transaction) : null;
     }
 
+    @Override
+    public Long getTotalValueOfMnemonic(String mnemonic) {
+        return null;
+    }
+
+
 }

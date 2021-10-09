@@ -60,4 +60,14 @@ public class AccountTypeTranslatorImp implements AccountTypeTranslator {
 
     }
 
+    @Override
+    public AccountType getAccountTypeByDbEntityMnemonic(String accountTypeMnemonic) {
+        try{
+            AccountType accountType = accountTypeRepo.getAccountTypeByMnemonic(accountTypeMnemonic);
+            return accountType;
+        }catch(Exception ex){
+            throw new RuntimeException("Unable to read from the DB", ex);
+        }
+    }
+
 }

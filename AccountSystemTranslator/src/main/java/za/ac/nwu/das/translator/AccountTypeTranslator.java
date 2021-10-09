@@ -13,4 +13,6 @@ public interface AccountTypeTranslator {
 
     AccountTypeDto createAccountType(AccountTypeDto accountType);
 
+    AccountType getAccountTypeByDbEntityMnemonic(String accountTypeMnemonic);
+
 }

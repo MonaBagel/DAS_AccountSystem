@@ -39,8 +39,6 @@ public class CreateAccountTransactionServiceImp implements CreateAccountTransact
             accountTransactionDto.setTransactionDate(LocalDate.now());
         }
 
-
-
         AccountType accountType = fetchAccountTypeService.getAccountTypeByDbEntityMnemonic(
                 accountTransactionDto.getAccountTypeMnemonic());
 
