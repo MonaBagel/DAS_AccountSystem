@@ -33,7 +33,14 @@ public class CreateAccountTransactionServiceImp implements CreateAccountTransact
     @Override
     public AccountTransactionDto createAccountTransaction(AccountTransactionDto accountTransactionDto) {
 
-        accountTransactionDto.setTransactionId(null);
+        accountTransactionDto.setTransactionId(null); // case where id has been filled in
+
+        if(null == accountTransactionDto.getTransactionDate()){
+            accountTransactionDto.setTransactionDate(LocalDate.now());
+        }
+
+
+
         AccountType accountType = fetchAccountTypeService.getAccountTypeByDbEntityMnemonic(
                 accountTransactionDto.getAccountTypeMnemonic());
 
@@ -41,11 +48,6 @@ public class CreateAccountTransactionServiceImp implements CreateAccountTransact
         AccountTransaction createdAccountTransaction = accountTransactionTranslator.save(accountTransaction);
 
         return new AccountTransactionDto(createdAccountTransaction);
-
-                if (null == accountTransaction.getTransactionDate()) {
-                    accountTransaction.setTransactionDate(LocalDate.now());
-                }
-
     }
 
 
