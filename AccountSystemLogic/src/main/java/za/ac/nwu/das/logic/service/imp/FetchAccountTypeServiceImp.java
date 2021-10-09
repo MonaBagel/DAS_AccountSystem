@@ -3,6 +3,7 @@ package za.ac.nwu.das.logic.service.imp;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import za.ac.nwu.das.domain.dto.AccountTypeDto;
+import za.ac.nwu.das.domain.persistence.AccountType;
 import za.ac.nwu.das.logic.service.FetchAccountTypeService;
 import za.ac.nwu.das.translator.AccountTypeTranslator;
 
@@ -30,6 +31,12 @@ public class FetchAccountTypeServiceImp implements FetchAccountTypeService {
     public AccountTypeDto getAccountTypeByMnemonic(String mnemonic){
 
         return accountTypeTranslator.getAccountTypeByMnemonic(mnemonic);
+    }
+
+    @Override
+    public AccountType getAccountTypeByDbEntityMnemonic(String mnemonic) {
+
+        return null;
     }
 
 

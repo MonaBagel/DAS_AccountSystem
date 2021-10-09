@@ -66,47 +66,26 @@ public class AccountTransactionController {
     }
 
 
-//    @PostMapping("")
-//    public ResponseEntity<GeneralResponse<AccountTXNDto>> create(){
-//
-//    }
+    @PostMapping("")
+    @ApiOperation(value = "Creates a new AccountTransaction", notes= "Creates a new AccountTransaction in the DB.")
+    @ApiResponses(value = {
+            @ApiResponse(code = 201, message = "The AccountTransaction was created succesfully", response = GeneralResponse.class),
+            @ApiResponse(code = 400, message = "Bad Request", response = GeneralResponse.class),
+            @ApiResponse(code = 500, message = "Internal Server Error", response = GeneralResponse.class)})
+    public ResponseEntity<GeneralResponse<AccountTransactionDto>> create(
+            @ApiParam(value = "Request body to create a new AccountTransaction.", required = true)
+            @RequestBody AccountTransactionDto accountTransaction){
+
+        AccountTransactionDto transactionResponse = createAccountTransactionService.createAccountTransaction(accountTransaction);
+
+        GeneralResponse<AccountTransactionDto> response = new GeneralResponse<>(true, transactionResponse);
+
+        return new ResponseEntity<>(response, HttpStatus.CREATED);
+    }
 
 
 
 
-
-
-
-
-
-
-
-
-    //getTransaction()                                       gets a specific AccountTransaction
-    //getAllTransactions()
-    //createNewTransaction()
-
-
-//    @GetMapping("/viewAccountTypeValue")
-//    @ApiOperation(value = "Calculates total value of an Account Type for a member", notes = "Fetches AccountTransactions amounts corresponding AccountType and calculates the total value")
-//    @ApiResponses(value = {
-//            @ApiResponse(code = 200, message = "AccountType Value Calculated"),
-//            @ApiResponse(code = 400, message = "Bad Request", response = GeneralResponse.class),
-//            @ApiResponse(code = 404, message = "Failed To Calculate Total Value", response = GeneralResponse.class),
-//            @ApiResponse(code = 500, message = "Internal Server Error", response = GeneralResponse.class)
-//    })
-////    public ResponseEntity<GeneralResponse<AccountTXNDto>> calculateValue(){
-////        @ApiParam(value = "The mnemonic that uniquely identifies the AccountType",
-////                    example = "MILES",
-////                    name = "mnemonic",
-////                    required = true)
-////        @PathVariable("mnemonic") final String mnemonic){
-////
-////    AccountTypeDto account
-////        }
-////
-////
-////    }
 
 
 

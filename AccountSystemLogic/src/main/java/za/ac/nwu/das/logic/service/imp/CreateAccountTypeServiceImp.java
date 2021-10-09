@@ -19,10 +19,6 @@ public class CreateAccountTypeServiceImp implements CreateAccountTypeService {
     @Override
     public AccountTypeDto createAccountType(AccountTypeDto accountTypeDto){
 
-//        if (null == accountTransaction.getTransactionDate()){
-//            accountTransaction.setTransactionDate(LocalDate.now());
-//        }
-
         return accountTypeTranslator.createAccountType(accountTypeDto);
     }
 

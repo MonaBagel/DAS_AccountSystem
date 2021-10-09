@@ -3,6 +3,7 @@ package za.ac.nwu.das.logic.service.imp;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import za.ac.nwu.das.domain.dto.AccountTransactionDto;
+import za.ac.nwu.das.domain.persistence.AccountTransaction;
 import za.ac.nwu.das.logic.service.FetchAccountTransactionService;
 import za.ac.nwu.das.translator.AccountTransactionTranslator;
 
@@ -32,7 +33,9 @@ public class FetchAccountTransactionServiceImp implements FetchAccountTransactio
     @Override
     public AccountTransactionDto getTransactionById(Long transactionId) {
 
-        return accountTransactionTranslator.getTransactionById(transactionId);
+        AccountTransaction transaction = accountTransactionTranslator.getTransactionByPk(transactionId);
+
+        return null != transaction ? new AccountTransactionDto(transaction) : null;
     }
 
 }

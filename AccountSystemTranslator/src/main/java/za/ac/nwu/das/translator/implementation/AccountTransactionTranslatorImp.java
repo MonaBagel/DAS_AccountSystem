@@ -39,12 +39,25 @@ public class AccountTransactionTranslatorImp implements AccountTransactionTransl
     }
 
     @Override
-    public AccountTransactionDto getTransactionById(Long transactionId) {
-        try{
-            AccountTransaction transaction = accountTransactionRepo.getTransactionById(transactionId);
-            return new AccountTransactionDto(transaction);
-        }catch (Exception ex){
+    public AccountTransaction getTransactionByPk(Long transactionId) {
+
+        try {
+            return accountTransactionRepo.findById(transactionId).orElse(null);
+        } catch (Exception ex){
             throw new RuntimeException("Unable to read from the DB", ex);
+        }
+
+
+
+    }
+
+    @Override
+    public AccountTransaction save(AccountTransaction accountTransaction) {
+
+        try{
+            return accountTransactionRepo.save(accountTransaction);
+        }catch (Exception ex){
+            throw new RuntimeException("Unable to save to the DB", ex);
         }
     }
 
