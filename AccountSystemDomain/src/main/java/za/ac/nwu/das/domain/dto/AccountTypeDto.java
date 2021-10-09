@@ -7,8 +7,7 @@ import za.ac.nwu.das.domain.persistence.AccountType;
 import java.io.Serializable;
 import java.util.Objects;
 
-@ApiModel(value = "AccountType",
-        description = "A DTO that represents AccountType")
+//@ApiModel(value = "AccountType", description = "A DTO that represents AccountType")
 public class AccountTypeDto implements Serializable {
 
     private static final long serialVersionUID = -4472156901973962350L;
@@ -25,8 +24,13 @@ public class AccountTypeDto implements Serializable {
     }
 
     public AccountTypeDto(AccountType accountType){
-        this.setAccountTypeName(accountType.getAccountTypeName());
         this.setMnemonic(accountType.getMnemonic());
+        this.setAccountTypeName(accountType.getAccountTypeName());
+    }
+
+    @JsonIgnore
+    public AccountType getAccountType() {
+        return new AccountType(this.getMnemonic(), this.getAccountTypeName());
     }
 
     @ApiModelProperty(position = 1,
@@ -63,11 +67,6 @@ public class AccountTypeDto implements Serializable {
         if (obj == null || getClass() != obj.getClass()) return false;
         AccountTypeDto that = (AccountTypeDto) obj;
         return Objects.equals(mnemonic, that.mnemonic) && Objects.equals(accountTypeName, that.accountTypeName);
-    }
-
-    @JsonIgnore
-    public AccountType getAccountType() {
-        return new AccountType(this.getMnemonic(), this.getAccountTypeName());
     }
 
     @Override

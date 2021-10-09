@@ -12,4 +12,5 @@ public interface FetchAccountTypeService {
     AccountTypeDto getAccountTypeByMnemonic(String mnemonic);
 
     AccountType getAccountTypeByDbEntityMnemonic(String accountTypeMnemonic);
+
 }

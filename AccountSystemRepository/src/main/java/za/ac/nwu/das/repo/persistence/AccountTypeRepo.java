@@ -25,6 +25,4 @@ public interface AccountTypeRepo extends JpaRepository<AccountType, Long> {
             "       WHERE acct.mnemonic = :accountTypeMnemonic ")
     AccountType getAccountTypeByDbEntityMnemonic(String accountTypeMnemonic);
 
-
-
 }

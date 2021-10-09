@@ -19,6 +19,8 @@ public class CreateAccountTypeServiceImp implements CreateAccountTypeService {
     @Override
     public AccountTypeDto createAccountType(AccountTypeDto accountTypeDto){
 
+
+
         return accountTypeTranslator.createAccountType(accountTypeDto);
     }
 

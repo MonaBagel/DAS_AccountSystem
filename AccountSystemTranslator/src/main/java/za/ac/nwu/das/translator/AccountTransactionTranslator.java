@@ -8,10 +8,11 @@ import java.util.List;
 
 public interface AccountTransactionTranslator{
 
-    List<AccountTransactionDto> getAllTransactions();
+    List<AccountTransaction> getAllTransactions();
 
     AccountTransaction getTransactionByPk(Long transactionId);
 
     AccountTransaction save(AccountTransaction accountTransaction);
 
+    //Long getTotalValueOfMnemonic(String mnemonic);
 }

@@ -1,6 +1,8 @@
 package za.ac.nwu.das.domain.dto;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 import za.ac.nwu.das.domain.persistence.AccountTransaction;
 import za.ac.nwu.das.domain.persistence.AccountType;
 
@@ -8,6 +10,7 @@ import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.Objects;
 
+//@ApiModel(value = "AccountType", description = "A DTO that represents AccountTransaction")
 public class AccountTransactionDto implements Serializable {
 
     private static final long serialVersionUID = 6444250063290608195L;
@@ -39,8 +42,7 @@ public class AccountTransactionDto implements Serializable {
 
     @JsonIgnore
     public AccountTransaction buildAccountTransaction(AccountType accountType){
-        return new AccountTransaction(this.getTransactionId(), accountType, this.getMemberId(),
-                this.getTransactionAmt(), this.getTransactionDate());
+        return new AccountTransaction(this.getTransactionId(), accountType, this.getMemberId(), this.getTransactionAmt(), this.getTransactionDate());
     }
 
     public Long getTransactionId() { return transactionId; }
@@ -48,21 +50,41 @@ public class AccountTransactionDto implements Serializable {
     public void setTransactionId(Long transactionId) { this.transactionId = transactionId; }
 
 
+
+    @ApiModelProperty(value =  "AccountType Mnemonic",
+            name = "Mnemonic",
+            notes = "Uniquely identifies the account type",
+            dataType = "java.lang.String",
+            example = "MILES",
+            required = true)
     public String getAccountTypeMnemonic() { return accountTypeMnemonic; }
 
     public void setAccountTypeMnemonic(String accountTypeMnemonic) { this.accountTypeMnemonic = accountTypeMnemonic; }
 
-
+    @ApiModelProperty(value =  "AccountTransaction Memeber Id",
+            name = "Member ID",
+            notes = "Uniquely identifies account member",
+            dataType = "java.lang.Long",
+            example = "3001",
+            required = true)
     public Long getMemberId() { return memberId; }
 
     public void setMemberId(Long memberId) { this.memberId = memberId; }
 
-
+    @ApiModelProperty(value =  "Amount to add to or subtract from an AccountType ",
+            name = "Transaction Amount",
+            notes = "Adds or subtracts value from an AccountType",
+            dataType = "java.lang.Long",
+            example = "500 or -500",
+            required = true)
     public Long getTransactionAmt() { return transactionAmt; }
 
     public void setTransactionAmt(Long transactionAmt) { this.transactionAmt = transactionAmt; }
 
-
+    @ApiModelProperty(value = "Date of AccountTransaction",
+            name = "Transaction Date",
+            notes = "Date of when transaction occurred",
+            required = true)
     public LocalDate getTransactionDate() { return transactionDate; }
 
     public void setTransactionDate(LocalDate transactionDate) { this.transactionDate = transactionDate; }

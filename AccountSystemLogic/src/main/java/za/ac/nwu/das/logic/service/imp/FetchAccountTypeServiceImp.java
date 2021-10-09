@@ -39,4 +39,5 @@ public class FetchAccountTypeServiceImp implements FetchAccountTypeService {
     }
 
 
+
 }

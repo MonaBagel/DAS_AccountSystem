@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import za.ac.nwu.das.domain.dto.AccountTransactionDto;
 import za.ac.nwu.das.domain.persistence.AccountTransaction;
+import za.ac.nwu.das.domain.persistence.AccountType;
 import za.ac.nwu.das.repo.persistence.AccountTransactionRepo;
 import za.ac.nwu.das.translator.AccountTransactionTranslator;
 
@@ -24,18 +25,16 @@ public class AccountTransactionTranslatorImp implements AccountTransactionTransl
 
 
     @Override
-    public List<AccountTransactionDto> getAllTransactions() {
+    public List<AccountTransaction> getAllTransactions() {
 
-        List<AccountTransactionDto> accountTransactionDtos = new ArrayList<>();
+        List<AccountTransaction> transactions = new ArrayList<>();
         try{
-            for(AccountTransaction accountTransaction : accountTransactionRepo.findAll()){
-                accountTransactionDtos.add(new AccountTransactionDto(accountTransaction));
-            }
+            transactions = new ArrayList<>(accountTransactionRepo.findAll());
         }catch(Exception ex){
             //TODO: log
             throw new RuntimeException("Unable to read from the DB", ex);
         }
-        return accountTransactionDtos;
+        return transactions;
     }
 
     @Override
@@ -46,9 +45,6 @@ public class AccountTransactionTranslatorImp implements AccountTransactionTransl
         } catch (Exception ex){
             throw new RuntimeException("Unable to read from the DB", ex);
         }
-
-
-
     }
 
     @Override
@@ -61,5 +57,14 @@ public class AccountTransactionTranslatorImp implements AccountTransactionTransl
         }
     }
 
+//    @Override
+//    public Long getTotalValueOfMnemonic(String mnemonic) {
+//        try{
+//            //Long totalValue = accountTransactionRepo.getTotalValueOfMnemonic(mnemonic);
+//            return null;
+//        } catch (Exception ex) {
+//            throw new RuntimeException("Unable to read from the DB", ex);
+//        }
+//    }
 
 }
