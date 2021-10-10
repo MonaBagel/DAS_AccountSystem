@@ -5,6 +5,8 @@ import io.swagger.annotations.ApiParam;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 import io.swagger.v3.oas.annotations.parameters.RequestBody;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -22,6 +24,9 @@ public class AccountTypeController {
 
     private final FetchAccountTypeService fetchAccountTypeService;
     private final CreateAccountTypeService createAccountTypeService;
+
+    //LOGGING
+    public static final Logger LOGGER = LoggerFactory.getLogger(AccountTypeController.class);
 
     @Autowired
     public AccountTypeController(FetchAccountTypeService fetchAccountTypeService,

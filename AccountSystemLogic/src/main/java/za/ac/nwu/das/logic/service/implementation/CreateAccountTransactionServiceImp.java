@@ -14,7 +14,7 @@ import za.ac.nwu.das.translator.AccountTypeTranslator;
 import javax.transaction.Transactional;
 import java.time.LocalDate;
 
-@Transactional
+@Transactional //Allows for rollback of application
 @Component
 class CreateAccountTransactionServiceImp implements CreateAccountTransactionService {
 

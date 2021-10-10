@@ -27,6 +27,7 @@ public class AccountTransactionController {
 
     //LOGGING
     public static final Logger LOGGER = LoggerFactory.getLogger(AccountTransactionController.class);
+    long startTime = System.nanoTime();
 
 
     @Autowired
@@ -45,9 +46,15 @@ public class AccountTransactionController {
                     @ApiResponse(code = 500, message = "Internal Server Error", response = GeneralResponse.class)})
     public ResponseEntity<GeneralResponse<List<AccountTransactionDto>>> getAll(){
 
+        LOGGER.debug("Get list of transactions from DB");
+
         List<AccountTransactionDto> transactions = fetchAccountTransactionService.getAllTransactions();
         GeneralResponse<List<AccountTransactionDto>> response = new GeneralResponse<>(true, transactions);
-        return new ResponseEntity<>(response, HttpStatus.OK);
+        ResponseEntity<GeneralResponse<List<AccountTransactionDto>>> generalResponseEntity = new ResponseEntity<>(response, HttpStatus.OK);
+
+        LOGGER.info("Response time {}", (System.nanoTime() - startTime)/1000000L);
+
+        return generalResponseEntity;
     }
 
     @GetMapping("/{transactionId}")
@@ -64,9 +71,15 @@ public class AccountTransactionController {
                         required = true)
             @PathVariable("transactionId") final Long transactionId){
 
+        LOGGER.debug("Get a specific transaction from DB");
+
         AccountTransactionDto accountTransaction = fetchAccountTransactionService.getTransactionById(transactionId);
         GeneralResponse<AccountTransactionDto> response = new GeneralResponse<>(true, accountTransaction);
-        return new ResponseEntity<>(response, HttpStatus.OK);
+        ResponseEntity<GeneralResponse<AccountTransactionDto>> generalResponseEntity = new ResponseEntity<>(response, HttpStatus.OK);
+
+        LOGGER.info("Response time {}", (System.nanoTime() - startTime)/1000000L);
+
+        return generalResponseEntity;
     }
 
 
@@ -79,7 +92,7 @@ public class AccountTransactionController {
     public ResponseEntity<GeneralResponse<AccountTransactionDto>> create(
             @ApiParam(value = "Request body to create a new AccountTransaction.", required = true)
             @RequestBody AccountTransactionDto accountTransaction){
-        long startTime = System.nanoTime();
+
         LOGGER.debug("Create a new AccountTransaction");
 
         AccountTransactionDto transactionResponse = createAccountTransactionService.createAccountTransaction(accountTransaction);
@@ -87,6 +100,7 @@ public class AccountTransactionController {
         ResponseEntity<GeneralResponse<AccountTransactionDto>> generalResponseEntity = new ResponseEntity<>(response, HttpStatus.CREATED);
 
         LOGGER.info("Response time {}", (System.nanoTime() - startTime)/1000000L);
+
         return generalResponseEntity;
     }
 
@@ -105,9 +119,15 @@ public class AccountTransactionController {
                     required = true)
             @PathVariable ("mnemonic") final String mnemonic){
 
+        LOGGER.debug("Calculates value of an AccountType through AccountTransactions made");
+
         Long accountValue = fetchAccountTransactionService.getTotalValueOfMnemonic(mnemonic);
         GeneralResponse<Long> response = new GeneralResponse<>(true, accountValue);
-        return new ResponseEntity<>(response, HttpStatus.OK);
+        ResponseEntity<GeneralResponse<Long>> generalResponseEntity = new ResponseEntity<>(response, HttpStatus.OK);
+
+        LOGGER.info("Response time {}", (System.nanoTime() - startTime)/1000000L);
+
+        return generalResponseEntity;
     }
 
 

@@ -1,6 +1,8 @@
 package za.ac.nwu.das.translator.implementation;
 
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import za.ac.nwu.das.domain.dto.AccountTransactionDto;
@@ -14,6 +16,9 @@ import java.util.List;
 
 @Component
 public class AccountTransactionTranslatorImp implements AccountTransactionTranslator {
+
+    //LOGGING
+    public static final Logger LOGGER = LoggerFactory.getLogger(AccountTransactionTranslatorImp.class);
 
     private final AccountTransactionRepo accountTransactionRepo;
 
@@ -31,7 +36,7 @@ public class AccountTransactionTranslatorImp implements AccountTransactionTransl
         try{
             transactions = new ArrayList<>(accountTransactionRepo.findAll());
         }catch(Exception ex){
-            //TODO: log
+            LOGGER.error("Exception getting list of transactions: " + ex.getMessage());
             throw new RuntimeException("Unable to read from the DB", ex);
         }
         return transactions;
@@ -44,6 +49,7 @@ public class AccountTransactionTranslatorImp implements AccountTransactionTransl
             return accountTransactionRepo.findById(transactionId).orElse(null);
 
         } catch (Exception ex){
+            LOGGER.error("Exception getting transaction by PK: " + ex.getMessage());
 
             throw new RuntimeException("Unable to read from the DB", ex);
         }
@@ -56,6 +62,7 @@ public class AccountTransactionTranslatorImp implements AccountTransactionTransl
             return accountTransactionRepo.save(accountTransaction);
 
         }catch (Exception ex){
+            LOGGER.error("Exception when writing new transaction to db: " + ex.getMessage());
 
             throw new RuntimeException("Unable to save to the DB", ex);
 
@@ -68,6 +75,9 @@ public class AccountTransactionTranslatorImp implements AccountTransactionTransl
             return accountTransactionRepo.getTotalValueOfMnemonic(mnemonic);
 
         } catch (Exception ex){
+
+            LOGGER.error("Exception when reading transactions and calculating value of an Account Type: " + ex.getMessage());
+
             throw new RuntimeException("Unable to read from the DB", ex);
 
         }
