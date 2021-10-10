@@ -1,5 +1,7 @@
 package za.ac.nwu.das.translator.implementation;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import za.ac.nwu.das.domain.dto.AccountTypeDto;
@@ -12,6 +14,8 @@ import java.util.List;
 
 @Component
 public class AccountTypeTranslatorImp implements AccountTypeTranslator {
+
+    public static final Logger LOGGER = LoggerFactory.getLogger(AccountTypeTranslatorImp.class);
 
     private final AccountTypeRepo accountTypeRepo;
 
@@ -30,7 +34,10 @@ public class AccountTypeTranslatorImp implements AccountTypeTranslator {
                 accountTypeDtos.add(new AccountTypeDto(accountType));
             }
         }catch (Exception ex){
-            //TODO: log
+            if(LOGGER.isDebugEnabled()){
+                LOGGER.error("Exception when fetching all accountTypes: " + ex.getMessage());
+            }
+
             throw new RuntimeException("Unable to read from the DB", ex);
         }
         return accountTypeDtos;
@@ -42,6 +49,9 @@ public class AccountTypeTranslatorImp implements AccountTypeTranslator {
             AccountType accountType = accountTypeRepo.getAccountTypeByMnemonic(mnemonic);
             return new AccountTypeDto(accountType);
         }catch(Exception ex){
+            if(LOGGER.isDebugEnabled()){
+                LOGGER.error("Exception when fetching accountType by mnemonic: " + ex.getMessage());
+            }
             throw new RuntimeException("Unable to read from the DB", ex);
         }
     }
@@ -54,7 +64,9 @@ public class AccountTypeTranslatorImp implements AccountTypeTranslator {
             AccountType accountType = accountTypeRepo.save(accountTypeDto.getAccountType());
             return new AccountTypeDto(accountType);
         }catch(Exception ex){
-            //TODO: log
+            if(LOGGER.isDebugEnabled()){
+                LOGGER.error("Exception when creating a new accountType: " + ex.getMessage());
+            }
             throw new RuntimeException("Unable to save to the DB", ex);
         }
 
@@ -66,6 +78,11 @@ public class AccountTypeTranslatorImp implements AccountTypeTranslator {
             AccountType accountType = accountTypeRepo.getAccountTypeByMnemonic(accountTypeMnemonic);
             return accountType;
         }catch(Exception ex){
+
+            if(LOGGER.isDebugEnabled()){
+                LOGGER.error("Exception when fetching accountType by mnemonic: " + ex.getMessage());
+            }
+
             throw new RuntimeException("Unable to read from the DB", ex);
         }
     }

@@ -51,6 +51,7 @@ class CreateAccountTransactionServiceImp implements CreateAccountTransactionServ
 
         AccountType accountType = fetchAccountTypeService.getAccountTypeByDbEntityMnemonic(
                 accountTransactionDto.getAccountTypeMnemonic());
+
         if(LOGGER.isDebugEnabled()){
             LOGGER.debug("Fetched AccountType for {}, AccountTypeId is {}", accountTransactionDto.getAccountTypeMnemonic(),
                     accountType.getAccountTypeId());

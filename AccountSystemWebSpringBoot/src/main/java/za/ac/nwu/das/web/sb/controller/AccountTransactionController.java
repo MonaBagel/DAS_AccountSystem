@@ -27,8 +27,6 @@ public class AccountTransactionController {
 
     //LOGGING
     public static final Logger LOGGER = LoggerFactory.getLogger(AccountTransactionController.class);
-    long startTime = System.nanoTime();
-
 
     @Autowired
     public AccountTransactionController(FetchAccountTransactionService fetchAccountTransactionService,
@@ -46,6 +44,7 @@ public class AccountTransactionController {
                     @ApiResponse(code = 500, message = "Internal Server Error", response = GeneralResponse.class)})
     public ResponseEntity<GeneralResponse<List<AccountTransactionDto>>> getAll(){
 
+        long startTime = System.nanoTime();
         LOGGER.debug("Get list of transactions from DB");
 
         List<AccountTransactionDto> transactions = fetchAccountTransactionService.getAllTransactions();
@@ -71,6 +70,7 @@ public class AccountTransactionController {
                         required = true)
             @PathVariable("transactionId") final Long transactionId){
 
+        long startTime = System.nanoTime();
         LOGGER.debug("Get a specific transaction from DB");
 
         AccountTransactionDto accountTransaction = fetchAccountTransactionService.getTransactionById(transactionId);
@@ -93,6 +93,7 @@ public class AccountTransactionController {
             @ApiParam(value = "Request body to create a new AccountTransaction.", required = true)
             @RequestBody AccountTransactionDto accountTransaction){
 
+        long startTime = System.nanoTime();
         LOGGER.debug("Create a new AccountTransaction");
 
         AccountTransactionDto transactionResponse = createAccountTransactionService.createAccountTransaction(accountTransaction);
@@ -119,6 +120,7 @@ public class AccountTransactionController {
                     required = true)
             @PathVariable ("mnemonic") final String mnemonic){
 
+        long startTime = System.nanoTime();
         LOGGER.debug("Calculates value of an AccountType through AccountTransactions made");
 
         Long accountValue = fetchAccountTransactionService.getTotalValueOfMnemonic(mnemonic);

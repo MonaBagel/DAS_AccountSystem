@@ -36,8 +36,6 @@ public class FetchAccountTransactionServiceImp implements FetchAccountTransactio
         List<AccountTransactionDto> accountTransactionDtos = new ArrayList<>();
         for(AccountTransaction accountTransaction : accountTransactionTranslator.getAllTransactions()){
             accountTransactionDtos.add(new AccountTransactionDto(accountTransaction));
-
-
         }
 
         LOGGER.info("Returned list is {}", accountTransactionDtos);
@@ -58,7 +56,6 @@ public class FetchAccountTransactionServiceImp implements FetchAccountTransactio
         }
 
         AccountTransaction transaction = accountTransactionTranslator.getTransactionByPk(transactionId);
-
         AccountTransactionDto accountTransactionDto = null != transaction ? new AccountTransactionDto(transaction) : null;
 
         LOGGER.info("Return obj is {}", accountTransactionDto);

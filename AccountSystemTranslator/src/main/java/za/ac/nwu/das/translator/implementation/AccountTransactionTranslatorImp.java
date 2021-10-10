@@ -35,8 +35,13 @@ public class AccountTransactionTranslatorImp implements AccountTransactionTransl
         List<AccountTransaction> transactions = new ArrayList<>();
         try{
             transactions = new ArrayList<>(accountTransactionRepo.findAll());
+
         }catch(Exception ex){
-            LOGGER.error("Exception getting list of transactions: " + ex.getMessage());
+
+            if(LOGGER.isDebugEnabled()){
+                LOGGER.error("Exception getting list of transactions: " + ex.getMessage());
+            }
+
             throw new RuntimeException("Unable to read from the DB", ex);
         }
         return transactions;
@@ -49,7 +54,9 @@ public class AccountTransactionTranslatorImp implements AccountTransactionTransl
             return accountTransactionRepo.findById(transactionId).orElse(null);
 
         } catch (Exception ex){
-            LOGGER.error("Exception getting transaction by PK: " + ex.getMessage());
+            if(LOGGER.isDebugEnabled()) {
+                LOGGER.error("Exception getting transaction by PK: " + ex.getMessage());
+            }
 
             throw new RuntimeException("Unable to read from the DB", ex);
         }
@@ -62,7 +69,9 @@ public class AccountTransactionTranslatorImp implements AccountTransactionTransl
             return accountTransactionRepo.save(accountTransaction);
 
         }catch (Exception ex){
-            LOGGER.error("Exception when writing new transaction to db: " + ex.getMessage());
+            if(LOGGER.isDebugEnabled()) {
+                LOGGER.error("Exception when writing new transaction to db: " + ex.getMessage());
+            }
 
             throw new RuntimeException("Unable to save to the DB", ex);
 
@@ -75,13 +84,12 @@ public class AccountTransactionTranslatorImp implements AccountTransactionTransl
             return accountTransactionRepo.getTotalValueOfMnemonic(mnemonic);
 
         } catch (Exception ex){
-
-            LOGGER.error("Exception when reading transactions and calculating value of an Account Type: " + ex.getMessage());
+            if(LOGGER.isDebugEnabled()) {
+                LOGGER.error("Exception when reading transactions and calculating value of an Account Type: " + ex.getMessage());
+            }
 
             throw new RuntimeException("Unable to read from the DB", ex);
 
         }
     }
-
-
 }

@@ -45,9 +45,18 @@ public class AccountTypeController {
                   @ApiResponse(code = 500, message = "Internal Server Error", response = GeneralResponse.class)})
     public ResponseEntity<GeneralResponse<List<AccountTypeDto>>> getAll(){
 
+        long startTime = System.nanoTime();
+        LOGGER.debug("Get list of AccountTypes from DB");
+
         List<AccountTypeDto> accountTypes = fetchAccountTypeService.getAllAccountTypes();
         GeneralResponse<List<AccountTypeDto>> response = new GeneralResponse<>(true, accountTypes);
-        return new ResponseEntity<>(response, HttpStatus.OK);
+        ResponseEntity<GeneralResponse<List<AccountTypeDto>>> generalResponseEntity = new ResponseEntity<>(response, HttpStatus.OK);
+
+        LOGGER.info("Response time {}", (System.nanoTime() - startTime)/1000000L);
+
+        return generalResponseEntity;
+
+
     }
 
     @GetMapping("/{mnemonic}")
@@ -65,11 +74,16 @@ public class AccountTypeController {
                     required = true)
             @PathVariable ("mnemonic") final String mnemonic){
 
+        long startTime = System.nanoTime();
+        LOGGER.debug("Get AccountTypes from DB by mnemonic");
+
         AccountTypeDto accountType = fetchAccountTypeService.getAccountTypeByMnemonic(mnemonic);
-
         GeneralResponse<AccountTypeDto> response = new GeneralResponse<>(true, accountType);
+        ResponseEntity<GeneralResponse<AccountTypeDto>> generalResponseEntity = new ResponseEntity<>(response, HttpStatus.OK);
 
-        return new ResponseEntity<>(response, HttpStatus.OK);
+        LOGGER.info("Response time {}", (System.nanoTime() - startTime)/1000000L);
+
+        return generalResponseEntity;
     }
 
 
@@ -83,41 +97,17 @@ public class AccountTypeController {
             @ApiParam(value = "Request body to create a new Account Type.", required = true)
             @RequestBody AccountTypeDto accountType){
 
+        long startTime = System.nanoTime();
+        LOGGER.debug("Create new AccountType");
+
         AccountTypeDto accountTypeResponse = createAccountTypeService.createAccountType(accountType);
-
         GeneralResponse<AccountTypeDto> response = new GeneralResponse<>(true, accountTypeResponse);
+        ResponseEntity<GeneralResponse<AccountTypeDto>> generalResponseEntity = new ResponseEntity<>(response, HttpStatus.CREATED);
 
-        return new ResponseEntity<>(response, HttpStatus.CREATED);
+        LOGGER.info("Response time {}", (System.nanoTime() - startTime)/1000000L);
+
+        return generalResponseEntity;
     }
-
-//    @GetMapping("/{mnemonic}")
-//    @ApiOperation(value = "Fetches a specific AccountType", notes = "Fetches the AccountType corresponding to the given mnemonic.")
-//    @ApiResponses(value = {
-//            @ApiResponse(code = 200, message = "AccountType Found"),
-//            @ApiResponse(code = 400, message = "Bad Request", response = GeneralResponse.class),
-//            @ApiResponse(code = 404, message = "AccountType Not Found", response = GeneralResponse.class),
-//            @ApiResponse(code = 500, message = "Internal Server Error", response = GeneralResponse.class)
-//    })
-//    public ResponseEntity<GeneralResponse<Long>> getByAcccountTypeId(
-//            @ApiParam(value = "The mnemonic that uniquely identifies the AccountType",
-//                    example = "MILES",
-//                    name = "mnemonic",
-//                    required = true)
-//            @PathVariable ("mnemonic") final String mnemonic){
-//
-//        Long accountId = fetchAccountTypeService.getAccountTypeIdByMnemonic(mnemonic);
-//
-//        GeneralResponse<Long> response = new GeneralResponse<>(true, accountId);
-//
-//        return new ResponseEntity<>(response, HttpStatus.OK);
-//    }
-
-
-
-
-
-
-
 
 }
 

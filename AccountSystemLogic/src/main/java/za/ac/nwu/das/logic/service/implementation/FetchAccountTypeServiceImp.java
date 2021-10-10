@@ -1,5 +1,7 @@
 package za.ac.nwu.das.logic.service.implementation;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import za.ac.nwu.das.domain.dto.AccountTypeDto;
@@ -10,9 +12,11 @@ import za.ac.nwu.das.translator.AccountTypeTranslator;
 import javax.transaction.Transactional;
 import java.util.List;
 
-@Transactional
+@Transactional //Allows for rollback of application
 @Component
 public class FetchAccountTypeServiceImp implements FetchAccountTypeService {
+
+    public static final Logger LOGGER = LoggerFactory.getLogger(FetchAccountTypeServiceImp.class);
 
     private final AccountTypeTranslator accountTypeTranslator;
 
@@ -24,17 +28,30 @@ public class FetchAccountTypeServiceImp implements FetchAccountTypeService {
     @Override
     public List<AccountTypeDto> getAllAccountTypes(){
 
-        return accountTypeTranslator.getAllAccountTypes();
+        List<AccountTypeDto> allAccountTypes = accountTypeTranslator.getAllAccountTypes();
+
+        LOGGER.info("Returned list: {}", allAccountTypes);
+
+        return allAccountTypes;
     }
 
     public AccountTypeDto getAccountTypeByMnemonic(String mnemonic){
 
-        return accountTypeTranslator.getAccountTypeByMnemonic(mnemonic);
+        AccountTypeDto accountTypeByMnemonic = accountTypeTranslator.getAccountTypeByMnemonic(mnemonic);
+
+        LOGGER.info("Returned obj is {}", accountTypeByMnemonic);
+
+        return accountTypeByMnemonic;
     }
 
     @Override
     public AccountType getAccountTypeByDbEntityMnemonic(String accountTypeMnemonic) {
-        return accountTypeTranslator.getAccountTypeByDbEntityMnemonic(accountTypeMnemonic);
+
+        AccountType accountTypeByDbEntityMnemonic = accountTypeTranslator.getAccountTypeByDbEntityMnemonic(accountTypeMnemonic);
+
+        LOGGER.info("Returned obj is {}", accountTypeByDbEntityMnemonic);
+
+        return accountTypeByDbEntityMnemonic;
     }
 
 
