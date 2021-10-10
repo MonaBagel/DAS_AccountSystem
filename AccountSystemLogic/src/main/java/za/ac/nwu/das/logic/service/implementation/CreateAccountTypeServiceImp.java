@@ -1,4 +1,4 @@
-package za.ac.nwu.das.logic.service.imp;
+package za.ac.nwu.das.logic.service.implementation;
 
 import org.springframework.stereotype.Component;
 import za.ac.nwu.das.domain.dto.AccountTypeDto;
@@ -17,11 +17,9 @@ public class CreateAccountTypeServiceImp implements CreateAccountTypeService {
     }
 
     @Override
-    public AccountTypeDto createAccountType(AccountTypeDto accountTypeDto){
+    public AccountTypeDto createAccountType(AccountTypeDto accountType){
 
-
-
-        return accountTypeTranslator.createAccountType(accountTypeDto);
+        return accountTypeTranslator.createAccountType(accountType);
     }
 
 }

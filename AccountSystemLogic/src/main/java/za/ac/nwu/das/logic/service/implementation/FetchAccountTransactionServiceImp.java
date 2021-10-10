@@ -1,14 +1,12 @@
-package za.ac.nwu.das.logic.service.imp;
+package za.ac.nwu.das.logic.service.implementation;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import za.ac.nwu.das.domain.dto.AccountTransactionDto;
 import za.ac.nwu.das.domain.persistence.AccountTransaction;
-import za.ac.nwu.das.domain.persistence.AccountType;
 import za.ac.nwu.das.logic.service.FetchAccountTransactionService;
 import za.ac.nwu.das.logic.service.FetchAccountTypeService;
 import za.ac.nwu.das.translator.AccountTransactionTranslator;
-import za.ac.nwu.das.translator.AccountTypeTranslator;
 
 import javax.transaction.Transactional;
 import java.util.ArrayList;

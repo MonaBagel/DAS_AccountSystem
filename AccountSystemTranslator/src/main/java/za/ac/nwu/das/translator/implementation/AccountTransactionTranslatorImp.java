@@ -42,7 +42,9 @@ public class AccountTransactionTranslatorImp implements AccountTransactionTransl
 
         try {
             return accountTransactionRepo.findById(transactionId).orElse(null);
+
         } catch (Exception ex){
+
             throw new RuntimeException("Unable to read from the DB", ex);
         }
     }
@@ -52,8 +54,11 @@ public class AccountTransactionTranslatorImp implements AccountTransactionTransl
 
         try{
             return accountTransactionRepo.save(accountTransaction);
+
         }catch (Exception ex){
+
             throw new RuntimeException("Unable to save to the DB", ex);
+
         }
     }
 
@@ -61,8 +66,10 @@ public class AccountTransactionTranslatorImp implements AccountTransactionTransl
     public Long getTotalValueOfMnemonic(String mnemonic) {
         try{
             return accountTransactionRepo.getTotalValueOfMnemonic(mnemonic);
-        }catch (Exception ex){
-            throw new RuntimeException("Unable to save to the DB", ex);
+
+        } catch (Exception ex){
+            throw new RuntimeException("Unable to read from the DB", ex);
+
         }
     }
 

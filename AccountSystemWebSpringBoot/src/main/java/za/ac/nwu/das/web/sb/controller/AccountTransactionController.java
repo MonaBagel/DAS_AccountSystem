@@ -4,6 +4,8 @@ import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -12,6 +14,7 @@ import za.ac.nwu.das.domain.dto.AccountTransactionDto;
 import za.ac.nwu.das.domain.service.GeneralResponse;
 import za.ac.nwu.das.logic.service.CreateAccountTransactionService;
 import za.ac.nwu.das.logic.service.FetchAccountTransactionService;
+//import za.ac.nwu.das.logic.service.implementation.CreateAccountTransactionServiceImp;
 
 import java.util.List;
 
@@ -21,6 +24,9 @@ public class AccountTransactionController {
 
     private final FetchAccountTransactionService fetchAccountTransactionService;
     private final CreateAccountTransactionService createAccountTransactionService;
+
+    //LOGGING
+    public static final Logger LOGGER = LoggerFactory.getLogger(AccountTransactionController.class);
 
 
     @Autowired
@@ -73,12 +79,15 @@ public class AccountTransactionController {
     public ResponseEntity<GeneralResponse<AccountTransactionDto>> create(
             @ApiParam(value = "Request body to create a new AccountTransaction.", required = true)
             @RequestBody AccountTransactionDto accountTransaction){
+        long startTime = System.nanoTime();
+        LOGGER.debug("Create a new AccountTransaction");
 
         AccountTransactionDto transactionResponse = createAccountTransactionService.createAccountTransaction(accountTransaction);
-
         GeneralResponse<AccountTransactionDto> response = new GeneralResponse<>(true, transactionResponse);
+        ResponseEntity<GeneralResponse<AccountTransactionDto>> generalResponseEntity = new ResponseEntity<>(response, HttpStatus.CREATED);
 
-        return new ResponseEntity<>(response, HttpStatus.CREATED);
+        LOGGER.info("Response time {}", (System.nanoTime() - startTime)/1000000L);
+        return generalResponseEntity;
     }
 
     @GetMapping("/{mnemonic}")
